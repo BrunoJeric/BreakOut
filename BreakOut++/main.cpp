@@ -1,15 +1,10 @@
-#include "Game.h"
-Game* game = nullptr;
-int main(int argc, char* argv[]) {
-	game = new Game();
+#include "GameManager.h"
 
-	game->init("FirstWindow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
-	while (game->running()) {
-		game->handleEvents();
-		game->update();
-		game->render();
-	}
-	game->clean();
+int main(int argc, char* argv[]) {
+	GameManager* game = GameManager::Instance();
+	game->Run();
+	GameManager::Release();
+	game = NULL;
 	return 0;
 
 }
