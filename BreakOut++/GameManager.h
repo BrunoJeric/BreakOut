@@ -1,6 +1,7 @@
 #pragma once
 #include "Texture.h"
 #include "Timer.h"
+#include "InputManager.h"
 class GameManager {
 private:
 	static GameManager* sInstance;
@@ -11,6 +12,8 @@ private:
 	Graphics* mGraphics;
 
 	AssetManager* mAssetManager;
+
+	InputManager* mInputManager;
 
 	Timer* mTimer;
 	

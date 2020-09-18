@@ -23,6 +23,8 @@ GameManager::GameManager() {
 
 	mAssetManager = AssetManager::Instance();
 
+	mInputManager = InputManager::Instance();
+
 	mTimer = Timer::Instance();
 	
 
@@ -37,6 +39,9 @@ GameManager::~GameManager() {
 
 	AssetManager::Release();
 	mAssetManager = NULL;
+
+	InputManager::Release();
+	mInputManager = NULL;
 
 	Timer::Release();
 	mTimer = NULL;
@@ -57,6 +62,12 @@ void GameManager::Run() {
 		}
 
 		if (mTimer->DeltaTime() >= (1.0f / FRAME_RATE)) {
+
+			mInputManager->Update();
+
+			if (mInputManager->KeyDown(SDL_SCANCODE_D)) {
+				mTex->Translate(Vector2(200.0f, 0.0f) * mTimer->DeltaTime());
+			}
 
 			mGraphics->ClearBackBuffer();
 

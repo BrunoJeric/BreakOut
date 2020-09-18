@@ -18,6 +18,19 @@ struct Vector2
 		return Vector2(x / mag, y / mag);
 	}
 
+	Vector2& operator +=(const Vector2& right) {
+		x += right.x;
+		y += right.y;
+
+		return *this;
+	}
+	Vector2& operator -=(const Vector2& right) {
+		x -= right.x;
+		y -= right.y;
+
+		return *this;
+	}
+
 };
 inline Vector2 operator +(const Vector2& left, const Vector2& right) {
 	return Vector2(left.x + right.x, left.y + right.y);
@@ -25,6 +38,10 @@ inline Vector2 operator +(const Vector2& left, const Vector2& right) {
 inline Vector2 operator -(const Vector2& left, const Vector2& right) {
 	return Vector2(left.x - right.x, left.y - right.y);
 }
+inline Vector2 operator *(const Vector2& left, const float& right) {
+	return Vector2(left.x* right, left.y * right);
+}
+
 
 inline Vector2 RotateVector(Vector2& vec, float angle) {
 	float radAngle = (float)(angle * DEG_TO_RAD);

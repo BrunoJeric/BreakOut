@@ -26,7 +26,7 @@ public:
 
 	void ClearBackBuffer();
 
-	void DrawTexture(SDL_Texture* tex, SDL_Rect* rend = NULL);
+	void DrawTexture(SDL_Texture* tex, SDL_Rect* clip = NULL, SDL_Rect* rend = NULL);
 
 	void Render();
 private:
