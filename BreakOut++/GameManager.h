@@ -7,22 +7,21 @@ class GameManager {
 private:
 	static GameManager* sInstance;
 	
-	const int FRAME_RATE = 60;
+	const int FRAME_RATE = 120;
 
 	bool mQuit;
+
+	//list of managers
 	Graphics* mGraphics;
-
 	AssetManager* mAssetManager;
-
 	InputManager* mInputManager;
-
 	AudioManager* mAudioManager;
 
+
 	Timer* mTimer;
-	
+	//catch exit event
 	SDL_Event mEvents;
 
-	Texture* mTex;
 
 public:
 	static GameManager* Instance();
@@ -34,7 +33,9 @@ private:
 	~GameManager();
 
 	void EarlyUpdate();
+	//all transformations are to be done in this functions 
 	void Update();
+	//collision detection to be done in LateUpdate
 	void LateUpdate();
 
 	void Render();

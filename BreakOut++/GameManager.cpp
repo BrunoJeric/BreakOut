@@ -16,24 +16,25 @@ void GameManager::Release() {
 
 GameManager::GameManager() {
 	mQuit = false;
+
+	//Initialize SDL
 	mGraphics = Graphics::Instance();
 
+	// Quits the game if SDL fails to initialize
 	if (!Graphics::Initialized())
 		mQuit = true;
 
+	//Initialize AssetManager
 	mAssetManager = AssetManager::Instance();
 
+	//Initialize InputManager
 	mInputManager = InputManager::Instance();
 
+	//Initialize AudioManager
 	mAudioManager = AudioManager::Instance();
 
+	//Initialize Timer
 	mTimer = Timer::Instance();
-	
-
-	mTex = new Texture("Hello World!", "ARCADE.TTF", 64, {0,250,0});
-	mTex->Pos(Vector2(Graphics::SCREEN_WIDTH * 0.5, Graphics::SCREEN_HEIGHT* 0.5));
-	mTex->Scale(Vector2(0.5f, 0.5f));
-
 }
 
 GameManager::~GameManager() {
@@ -53,8 +54,7 @@ GameManager::~GameManager() {
 	Timer::Release();
 	mTimer = NULL;
 
-	delete mTex;
-	mTex = NULL;
+
 
 
 }
