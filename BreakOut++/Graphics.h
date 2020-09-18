@@ -24,7 +24,7 @@ public:
 	static bool Initialized();
 	
 	SDL_Texture* LoadTexture(std::string path);
-	SDL_Texture* CreateTextTexture(TTF_Font* font, std::string text);
+	SDL_Texture* CreateTextTexture(TTF_Font* font, std::string text, SDL_Color color);
 
 	void ClearBackBuffer();
 

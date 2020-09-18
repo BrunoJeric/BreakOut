@@ -28,7 +28,7 @@ GameManager::GameManager() {
 	mTimer = Timer::Instance();
 	
 
-	mTex = new Texture("Ante je glup!","ARCADE.TTF",64);
+	mTex = new Texture("Hello World!", "ARCADE.TTF", 64, {0,250,0});
 	mTex->Pos(Vector2(Graphics::SCREEN_WIDTH * 0.5, Graphics::SCREEN_HEIGHT* 0.5));
 
 }

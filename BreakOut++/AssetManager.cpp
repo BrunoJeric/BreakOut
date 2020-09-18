@@ -65,11 +65,11 @@ TTF_Font* AssetManager::GetFont(std::string filename, int size) {
 	return mFonts[key];
 }
 
-SDL_Texture* AssetManager::GetText(std::string text, std::string filename, int size) {
+SDL_Texture* AssetManager::GetText(std::string text, std::string filename, int size,SDL_Color color) {
 	TTF_Font* font = GetFont(filename, size);
 	std::string key = text + filename + (char)size;
 	if (mText[key] == nullptr) {
-		mText[key] = Graphics::Instance()->CreateTextTexture(font, text);
+		mText[key] = Graphics::Instance()->CreateTextTexture(font, text,color);
 	}
 	return mText[key];
 }

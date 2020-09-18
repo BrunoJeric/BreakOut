@@ -93,8 +93,8 @@ SDL_Texture* Graphics::LoadTexture(std::string path) {
 
 }
 
-SDL_Texture* Graphics::CreateTextTexture(TTF_Font* font, std::string text) {
-	SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), { 0,0,0 });
+SDL_Texture* Graphics::CreateTextTexture(TTF_Font* font, std::string text,SDL_Color color) {
+	SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), color);
 	if (surface == NULL) {
 		std::cout << "Text Render Error:" << SDL_GetError() <<std::endl;
 		return NULL;

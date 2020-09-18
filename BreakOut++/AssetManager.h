@@ -17,7 +17,7 @@ public:
 	static void Release();
 
 	SDL_Texture* GetTexture(std::string filename);
-	SDL_Texture* GetText(std::string text,std::string filename,int size);
+	SDL_Texture* GetText(std::string text,std::string filename,int size,SDL_Color color);
 
 private:
 	AssetManager();

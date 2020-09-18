@@ -31,9 +31,9 @@ Texture::Texture(std::string fileName, int x, int y, int w, int h) {
 	mClipRect.h = mHeight;
 }
 
-Texture::Texture(std::string text, std::string fontpath, int size) {
+Texture::Texture(std::string text, std::string fontpath, int size,SDL_Color color) {
 	mGraphics = Graphics::Instance();
-	mTex = AssetManager::Instance()->GetText(text, fontpath, size);
+	mTex = AssetManager::Instance()->GetText(text, fontpath, size,color);
 
 	mClipped = false;
 
