@@ -3,40 +3,42 @@
 #include "Timer.h"
 #include "InputManager.h"
 #include "AudioManager.h"
-class GameManager {
-private:
-	static GameManager* sInstance;
-	
-	const int FRAME_RATE = 120;
+namespace EngineSDL {
+	class GameManager {
+	private:
+		static GameManager* sInstance;
 
-	bool mQuit;
+		const int FRAME_RATE = 120;
 
-	//list of managers
-	Graphics* mGraphics;
-	AssetManager* mAssetManager;
-	InputManager* mInputManager;
-	AudioManager* mAudioManager;
+		bool mQuit;
 
-
-	Timer* mTimer;
-	//catch exit event
-	SDL_Event mEvents;
+		//list of managers
+		Graphics* mGraphics;
+		AssetManager* mAssetManager;
+		InputManager* mInputManager;
+		AudioManager* mAudioManager;
 
 
-public:
-	static GameManager* Instance();
-	static void Release();
+		Timer* mTimer;
+		//catch exit event
+		SDL_Event mEvents;
 
-	void Run();
-private:
-	GameManager();
-	~GameManager();
 
-	void EarlyUpdate();
-	//all transformations are to be done in this functions 
-	void Update();
-	//collision detection to be done in LateUpdate
-	void LateUpdate();
+	public:
+		static GameManager* Instance();
+		static void Release();
 
-	void Render();
-};
+		void Run();
+	private:
+		GameManager();
+		~GameManager();
+
+		void EarlyUpdate();
+		//all transformations are to be done in this functions 
+		void Update();
+		//collision detection to be done in LateUpdate
+		void LateUpdate();
+
+		void Render();
+	};
+}

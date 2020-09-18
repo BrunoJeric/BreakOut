@@ -2,33 +2,36 @@
 
 #include "Timer.h"
 #include "Texture.h"
-class AnimatedTexture : public Texture{
 
-public:
+namespace EngineSDL {
+	class AnimatedTexture : public Texture {
 
-	enum WRAP_MODE { once = 0, loop=1 };
-	enum ANIM_DIR {horizontal=0, vertical=1};
+	public:
 
-private:
-	Timer* mTimer;
-	int mStartX;
-	int mStartY;
+		enum WRAP_MODE { once = 0, loop = 1 };
+		enum ANIM_DIR { horizontal = 0, vertical = 1 };
 
-	float mAnimationTimer;
-	float mAnimationSpeed;
-	float mTimePerFrame;
+	private:
+		Timer* mTimer;
+		int mStartX;
+		int mStartY;
 
-	int mFrameCount;
+		float mAnimationTimer;
+		float mAnimationSpeed;
+		float mTimePerFrame;
 
-	WRAP_MODE mWrapMode;
-	ANIM_DIR mAnimationDirection;
+		int mFrameCount;
 
-	bool mAnimationDone;
+		WRAP_MODE mWrapMode;
+		ANIM_DIR mAnimationDirection;
 
-public:
-	AnimatedTexture(std::string fileName, int x,int y, int w, int h, int frameCount,float animationSpeed,ANIM_DIR animationDir);
-	~AnimatedTexture();
-	void WrapMode(WRAP_MODE mode);
-	void Update();
+		bool mAnimationDone;
 
-};
+	public:
+		AnimatedTexture(std::string fileName, int x, int y, int w, int h, int frameCount, float animationSpeed, ANIM_DIR animationDir);
+		~AnimatedTexture();
+		void WrapMode(WRAP_MODE mode);
+		void Update();
+
+	};
+}

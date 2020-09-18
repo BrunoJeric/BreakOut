@@ -1,53 +1,55 @@
 #include "Timer.h"
-Timer* Timer::sInstance = NULL;
+namespace EngineSDL {
+	Timer* Timer::sInstance = NULL;
 
-Timer* Timer::Instance() {
+	Timer* Timer::Instance() {
 
-	if(sInstance == NULL)
-		sInstance = new Timer();
+		if (sInstance == NULL)
+			sInstance = new Timer();
 
-	return sInstance;
-}
+		return sInstance;
+	}
 
-void Timer::Release() {
+	void Timer::Release() {
 
-	delete sInstance;
-	sInstance = NULL;
-}
+		delete sInstance;
+		sInstance = NULL;
+	}
 
-Timer::Timer() {
-	Reset();
-	mElapsedTicks = 0;
-	mDeltaTime = 0.0f;
-	mTimeScale = 1.0f;
-}
+	Timer::Timer() {
+		Reset();
+		mElapsedTicks = 0;
+		mDeltaTime = 0.0f;
+		mTimeScale = 1.0f;
+	}
 
-Timer::~Timer() {
+	Timer::~Timer() {
 
-}
+	}
 
-void Timer::Reset() {
+	void Timer::Reset() {
 
-	mStartTicks = SDL_GetTicks();
-}
+		mStartTicks = SDL_GetTicks();
+	}
 
-float Timer::DeltaTime() {
+	float Timer::DeltaTime() {
 
-	return mDeltaTime;
-}
+		return mDeltaTime;
+	}
 
-void Timer::TimeScale(float t) {
+	void Timer::TimeScale(float t) {
 
-	mTimeScale = t;
-}
+		mTimeScale = t;
+	}
 
-float Timer::TimeScale() {
+	float Timer::TimeScale() {
 
-	return mTimeScale;
-}
+		return mTimeScale;
+	}
 
-void Timer::Update() {
+	void Timer::Update() {
 
-	mElapsedTicks = SDL_GetTicks() - mStartTicks;
-	mDeltaTime = mElapsedTicks * 0.001f;
+		mElapsedTicks = SDL_GetTicks() - mStartTicks;
+		mDeltaTime = mElapsedTicks * 0.001f;
+	}
 }

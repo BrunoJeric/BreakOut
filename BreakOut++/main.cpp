@@ -1,9 +1,9 @@
 #include "GameManager.h"
 
 int main(int argc, char* argv[]) {
-	GameManager* game = GameManager::Instance();
+	EngineSDL::GameManager* game = EngineSDL::GameManager::Instance();
 	game->Run();
-	GameManager::Release();
+	EngineSDL::GameManager::Release();
 	game = NULL;
 	return 0;
 
