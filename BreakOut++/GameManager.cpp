@@ -25,6 +25,8 @@ GameManager::GameManager() {
 
 	mInputManager = InputManager::Instance();
 
+	mAudioManager = AudioManager::Instance();
+
 	mTimer = Timer::Instance();
 	
 
@@ -34,6 +36,9 @@ GameManager::GameManager() {
 }
 
 GameManager::~GameManager() {
+
+	AudioManager::Release();
+	mAudioManager = NULL;
 
 	AssetManager::Release();
 	mAssetManager = NULL;
@@ -66,8 +71,11 @@ void GameManager::Run() {
 
 			mInputManager->Update();
 
-			if (mInputManager->KeyDown(SDL_SCANCODE_D)) {
+			/*if (mInputManager->KeyDown(SDL_SCANCODE_D)) {
 				mTex->Translate(Vector2(200.0f, 0.0f) * mTimer->DeltaTime());
+			}*/
+			if (mInputManager->KeyDown(SDL_SCANCODE_SPACE)) {
+				mAudioManager->PlaySFX("KeyPress.wav");
 			}
 
 			mGraphics->ClearBackBuffer();

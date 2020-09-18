@@ -67,9 +67,37 @@ TTF_Font* AssetManager::GetFont(std::string filename, int size) {
 
 SDL_Texture* AssetManager::GetText(std::string text, std::string filename, int size,SDL_Color color) {
 	TTF_Font* font = GetFont(filename, size);
-	std::string key = text + filename + (char)size;
+	std::string key = text + filename + (char)size+(char)color.r + (char)color.b + (char)color.g;
 	if (mText[key] == nullptr) {
 		mText[key] = Graphics::Instance()->CreateTextTexture(font, text,color);
 	}
 	return mText[key];
+}
+
+Mix_Music* AssetManager::GetMusic(std::string filename) {
+	std::string fullpath = SDL_GetBasePath();
+	fullpath.append("Assets/" + filename);
+
+	if (mMusic[fullpath] == nullptr) {
+		mMusic[fullpath] = Mix_LoadMUS(fullpath.c_str());
+		if (mMusic[fullpath] == NULL) {
+			std::cout << "Music Loading Error: File(" << filename.c_str() << ") - Error(" << Mix_GetError() << ") " << std::endl;
+
+		}
+	}
+	return mMusic[fullpath];
+}
+
+Mix_Chunk* AssetManager::GetSFX(std::string filename) {
+	std::string fullpath = SDL_GetBasePath();
+	fullpath.append("Assets/" + filename);
+
+	if (mSFX[fullpath] == nullptr) {
+		mSFX[fullpath] = Mix_LoadWAV(fullpath.c_str());
+		if (mSFX[fullpath] == NULL) {
+			std::cout << "SFX Loading Error: File(" << filename.c_str() << ") - Error(" << Mix_GetError() << ") " << std::endl;
+
+		}
+	}
+	return mSFX[fullpath];
 }

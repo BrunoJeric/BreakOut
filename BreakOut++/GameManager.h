@@ -2,6 +2,7 @@
 #include "Texture.h"
 #include "Timer.h"
 #include "InputManager.h"
+#include "AudioManager.h"
 class GameManager {
 private:
 	static GameManager* sInstance;
@@ -14,6 +15,8 @@ private:
 	AssetManager* mAssetManager;
 
 	InputManager* mInputManager;
+
+	AudioManager* mAudioManager;
 
 	Timer* mTimer;
 	
