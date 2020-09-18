@@ -32,6 +32,7 @@ GameManager::GameManager() {
 
 	mTex = new Texture("Hello World!", "ARCADE.TTF", 64, {0,250,0});
 	mTex->Pos(Vector2(Graphics::SCREEN_WIDTH * 0.5, Graphics::SCREEN_HEIGHT* 0.5));
+	mTex->Scale(Vector2(0.5f, 0.5f));
 
 }
 
@@ -58,9 +59,35 @@ GameManager::~GameManager() {
 
 }
 
+void GameManager::EarlyUpdate(){
+
+	mTimer->Reset();
+	mInputManager->Update();
+
+
+}
+
+void GameManager::Update() {
+	
+}
+
+void GameManager::LateUpdate() {
+
+	mInputManager->UpdatePreviousInput();
+}
+
+void GameManager::Render() {
+
+	mGraphics->ClearBackBuffer();
+
+	mTex->Render();
+
+	mGraphics->Render();
+}
+
 void GameManager::Run() {
 	while (!mQuit) {
- 		mTimer->Update();
+		mTimer->Update();
 		while (SDL_PollEvent(&mEvents)!=0){
 			if (mEvents.type == SDL_QUIT) {
 				mQuit = true;
@@ -69,23 +96,11 @@ void GameManager::Run() {
 
 		if (mTimer->DeltaTime() >= (1.0f / FRAME_RATE)) {
 
-			mInputManager->Update();
+			EarlyUpdate();
+			Update();
+			LateUpdate();
 
-			/*if (mInputManager->KeyDown(SDL_SCANCODE_D)) {
-				mTex->Translate(Vector2(200.0f, 0.0f) * mTimer->DeltaTime());
-			}*/
-			if (mInputManager->KeyDown(SDL_SCANCODE_SPACE)) {
-				mAudioManager->PlaySFX("KeyPress.wav");
-			}
-
-			mGraphics->ClearBackBuffer();
-
-			mTex->Render();
-
-			mGraphics->Render();
-			
-			mTimer->Reset();
-		
+			Render();
 		}
 
 	}

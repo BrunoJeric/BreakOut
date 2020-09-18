@@ -7,7 +7,7 @@ class GameManager {
 private:
 	static GameManager* sInstance;
 	
-	const int FRAME_RATE = 120;
+	const int FRAME_RATE = 60;
 
 	bool mQuit;
 	Graphics* mGraphics;
@@ -32,4 +32,10 @@ public:
 private:
 	GameManager();
 	~GameManager();
+
+	void EarlyUpdate();
+	void Update();
+	void LateUpdate();
+
+	void Render();
 };
