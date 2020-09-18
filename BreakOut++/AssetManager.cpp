@@ -25,6 +25,18 @@ AssetManager::~AssetManager() {
 	}
 	mTextures.clear();
 
+	for (auto text : mText) {
+		if (text.second !=NULL ) {
+			SDL_DestroyTexture(text.second);
+		}
+	}
+	mText.clear();
+	for (auto font : mFonts) {
+		if (font.second != NULL) {
+			TTF_CloseFont(font.second);
+		}
+	}
+	mFonts.clear();
 }
 
 SDL_Texture* AssetManager::GetTexture(std::string filename) {
@@ -36,4 +48,28 @@ SDL_Texture* AssetManager::GetTexture(std::string filename) {
 	}
 
 	return mTextures[fullPath];
+}
+
+TTF_Font* AssetManager::GetFont(std::string filename, int size) {
+	std::string fullpath = SDL_GetBasePath();
+	fullpath.append("Assets/" + filename);
+	std::string key = fullpath + (char)size;
+
+	if (mFonts[key] == nullptr) {
+		mFonts[key] = TTF_OpenFont(fullpath.c_str(), size);
+		if (mFonts[key] == nullptr) {
+			std::cout << "Font Loading Error: Font(" << filename.c_str() << ") - Error(" << TTF_GetError() << ") " << std::endl;
+
+		}
+	}
+	return mFonts[key];
+}
+
+SDL_Texture* AssetManager::GetText(std::string text, std::string filename, int size) {
+	TTF_Font* font = GetFont(filename, size);
+	std::string key = text + filename + (char)size;
+	if (mText[key] == nullptr) {
+		mText[key] = Graphics::Instance()->CreateTextTexture(font, text);
+	}
+	return mText[key];
 }

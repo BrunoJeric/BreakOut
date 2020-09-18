@@ -28,18 +28,19 @@ GameManager::GameManager() {
 	mTimer = Timer::Instance();
 	
 
-	mTex = new Texture("platform.png");
-	mTex->Pos(Vector2(Graphics::SCREEN_WIDTH * 0.5, Graphics::SCREEN_HEIGHT* 0.9));
+	mTex = new Texture("Ante je glup!","ARCADE.TTF",64);
+	mTex->Pos(Vector2(Graphics::SCREEN_WIDTH * 0.5, Graphics::SCREEN_HEIGHT* 0.5));
 
 }
 
 GameManager::~GameManager() {
-	Graphics::Release();
-	mGraphics = NULL;
 
 	AssetManager::Release();
 	mAssetManager = NULL;
-
+	
+	Graphics::Release();
+	mGraphics = NULL;
+	
 	InputManager::Release();
 	mInputManager = NULL;
 

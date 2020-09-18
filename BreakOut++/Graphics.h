@@ -2,6 +2,7 @@
 #define SDL_MAIN_HANDLED
 #include "SDL.h"
 #include "SDL_image.h"
+#include "SDL_ttf.h"
 #include<iostream>
 #include <string>
 
@@ -23,6 +24,7 @@ public:
 	static bool Initialized();
 	
 	SDL_Texture* LoadTexture(std::string path);
+	SDL_Texture* CreateTextTexture(TTF_Font* font, std::string text);
 
 	void ClearBackBuffer();
 

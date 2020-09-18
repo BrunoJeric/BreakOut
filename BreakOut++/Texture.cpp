@@ -31,6 +31,20 @@ Texture::Texture(std::string fileName, int x, int y, int w, int h) {
 	mClipRect.h = mHeight;
 }
 
+Texture::Texture(std::string text, std::string fontpath, int size) {
+	mGraphics = Graphics::Instance();
+	mTex = AssetManager::Instance()->GetText(text, fontpath, size);
+
+	mClipped = false;
+
+	SDL_QueryTexture(mTex, NULL, NULL, &mWidth, &mHeight);
+
+	mRenderRect.w = mWidth;
+	mRenderRect.h = mHeight;
+
+
+}
+
 Texture::~Texture() {
 	mTex = NULL;
 	mGraphics = NULL;
