@@ -65,26 +65,38 @@ namespace EngineSDL {
 	}
 
 	TTF_Font* AssetManager::GetFont(std::string filename, int size) {
-		std::string fullpath = SDL_GetBasePath();
-		fullpath.append("Assets/" + filename);
-		std::string key = fullpath + (char)size;
+		//Get the full path of the font
+		std::string fullPath = SDL_GetBasePath();
+		fullPath.append("Assets/" + filename);
 
+		//The key takes into account the size of the font aswell since the same font can be opened with different sizes
+		std::string key = fullPath + (char)size;
+
+		//If the font has not been already loaded, load it and add it to the mFonts map
 		if (mFonts[key] == nullptr) {
-			mFonts[key] = TTF_OpenFont(fullpath.c_str(), size);
-			if (mFonts[key] == nullptr) {
-				std::cout << "Font Loading Error: Font(" << filename.c_str() << ") - Error(" << TTF_GetError() << ") " << std::endl;
 
-			}
+			mFonts[key] = TTF_OpenFont(fullPath.c_str(), size);
+			//Error handling for opening the font
+			if (mFonts[key] == nullptr)
+				printf("Font Loading Error: Font-%s Error-%s", filename.c_str(), TTF_GetError());
 		}
+
+		//returning the cached font from the map
 		return mFonts[key];
 	}
 
 	SDL_Texture* AssetManager::GetText(std::string text, std::string filename, int size, SDL_Color color) {
+		//Get the font from the font cache
 		TTF_Font* font = GetFont(filename, size);
+
+		//The key takes into account the font, text, size, and color to differentiate text textures
 		std::string key = text + filename + (char)size + (char)color.r + (char)color.b + (char)color.g;
-		if (mText[key] == nullptr) {
+
+		//If the same text has not been rendered before, render it and add it to the mText map
+		if (mText[key] == nullptr)
 			mText[key] = Graphics::Instance()->CreateTextTexture(font, text, color);
-		}
+
+		//returning the cached texture containing the text
 		return mText[key];
 	}
 

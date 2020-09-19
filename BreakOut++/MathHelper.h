@@ -44,7 +44,7 @@ namespace EngineSDL {
 	}
 
 
-	inline Vector2 RotateVector(Vector2& vec, float angle) {
+	inline Vector2 RotateVector(const Vector2& vec, float angle) {
 		float radAngle = (float)(angle * DEG_TO_RAD);
 
 		return Vector2((float)(vec.x * cos(radAngle) - vec.y * sin(radAngle)), (float)(vec.x * sin(radAngle) + vec.y * cos(radAngle)));

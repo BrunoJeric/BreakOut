@@ -8,14 +8,13 @@
 namespace EngineSDL {
 	class Graphics {
 	public:
-		static const int SCREEN_WIDTH = 800;
-		static const int SCREEN_HEIGHT = 600;
+		static const int SCREEN_WIDTH = 640;
+		static const int SCREEN_HEIGHT = 480;
 	private:
 		static Graphics* sInstance;
 		static bool sInitialized;
 
 		SDL_Window* mWindow;
-		SDL_Surface* mBackBuffer;
 
 		SDL_Renderer* mRenderer;
 	public:

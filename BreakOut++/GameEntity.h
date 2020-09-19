@@ -18,7 +18,7 @@ namespace EngineSDL {
 
 	public:
 
-		GameEntity(float x = 0.0f, float y = 0.0f);
+		GameEntity(Vector2 pos = VEC_ZERO);
 		~GameEntity();
 
 		void Pos(Vector2 pos);
