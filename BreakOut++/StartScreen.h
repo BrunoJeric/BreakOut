@@ -7,10 +7,16 @@ using namespace EngineSDL;
 class StartScreen : public GameEntity {
 
 private:
+	Timer* mTimer;
+
 	//Top bar
 	GameEntity* mTopBar;
 	Texture* mPlayerOne;
 	Texture* mHighScore;
+
+	//Logo
+	Texture* mLogo;
+	AnimatedTexture* mAnimatedLogo;
 
 	//Start game
 	GameEntity* mPlay;
@@ -20,6 +26,14 @@ private:
 	GameEntity* mBottomBar;
 	Texture* mDate;
 	Texture* mCreds;
+
+	//Screen animation
+	Vector2 mAnimationStartPosition;
+	Vector2 mAnimationEndPosition;
+	float mAnimationTotalTime;
+	float mAnimationTimer;
+	bool mAnimationDone;
+
 public:
 	StartScreen();
 	~StartScreen();
