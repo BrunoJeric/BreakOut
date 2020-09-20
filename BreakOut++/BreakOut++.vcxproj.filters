@@ -78,6 +78,9 @@
     <ClCompile Include="PlaySideBar.cpp">
       <Filter>Source Files\BreakOut</Filter>
     </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Source Files\BreakOut</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Timer.h">
@@ -123,6 +126,9 @@
       <Filter>Header Files\BreakOut</Filter>
     </ClInclude>
     <ClInclude Include="PlaySideBar.h">
+      <Filter>Header Files\BreakOut</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
       <Filter>Header Files\BreakOut</Filter>
     </ClInclude>
   </ItemGroup>

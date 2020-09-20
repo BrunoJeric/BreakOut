@@ -39,8 +39,11 @@ void ScreenManager::Update() {
 	case start:
 		mStartScreen->Update();
 		if (mInputManager->KeyPressed(SDL_SCANCODE_RETURN)) {
+			
 			mCurrentScreen = play;
 			mStartScreen->ResetAnimation();
+			mPlayScreen->StartNewGame();
+
 		}
 		break;
 	case play:

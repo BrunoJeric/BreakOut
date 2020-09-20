@@ -22,14 +22,23 @@ private:
 
 	ScoreBoard* mPlayerScoreboard;
 
-	//Texture* mLevelLabel;
+	static const int MAX_LIFES = 3;
+	GameEntity* mLifes;
+	Texture* mLifesTextures[MAX_LIFES];
+	int mTotalLifes;
+
+	GameEntity* mLevel;
+	ScoreBoard* mLevelNumber;
+	Texture* mLevelLabel;
 
 public:
 	PlaySideBar();
 	~PlaySideBar();
 
+	void SetLifes(int lifes);
 	void SetHighScore(int score);
 	void SetPlayerScore(int score);
+	void SetLevel(int level);
 
 	void Update();
 	void Render();

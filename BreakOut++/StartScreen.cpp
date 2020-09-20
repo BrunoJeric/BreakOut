@@ -23,7 +23,7 @@ StartScreen::StartScreen() {
 	mPlayerOneScore->Pos(Vector2(-Graphics::Instance()->SCREEN_WIDTH * 0.23f, 35.0f));
 	mTopScore->Pos(Vector2(Graphics::Instance()->SCREEN_WIDTH * 0.15f, 35.0f));
 	mPlayerOneScore->Score(15236);
-	mTopScore->Score(30000);
+	mTopScore->Score(25000);
 	
 	mTopBar->Parent(this);
 
