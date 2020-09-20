@@ -8,8 +8,8 @@
 namespace EngineSDL {
 	class Graphics {
 	public:
-		static const int SCREEN_WIDTH = 640;
-		static const int SCREEN_HEIGHT = 480;
+		static const int SCREEN_WIDTH = 860;
+		static const int SCREEN_HEIGHT = 645;
 	private:
 		static Graphics* sInstance;
 		static bool sInitialized;

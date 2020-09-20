@@ -1,6 +1,7 @@
 #pragma once
 #include "AnimatedTexture.h"
 #include "InputManager.h"
+#include "ScoreBoard.h"
 
 using namespace EngineSDL;
 
@@ -14,6 +15,8 @@ private:
 	GameEntity* mTopBar;
 	Texture* mPlayerOne;
 	Texture* mHighScore;
+	ScoreBoard* mPlayerOneScore;
+	ScoreBoard* mTopScore;
 
 	//Logo
 	Texture* mLogo;
@@ -45,6 +48,9 @@ public:
 	StartScreen();
 	~StartScreen();
 
+	void ResetAnimation();
+
+	int SelectedScreen();
 	void ChangeSelection(int change);
 
 	void Update();

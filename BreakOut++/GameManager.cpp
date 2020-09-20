@@ -36,10 +36,14 @@ namespace EngineSDL {
 		//Initialize Timer
 		mTimer = Timer::Instance();
 
-		mStartScreen = new StartScreen();
+		mScreenManager = ScreenManager::Instance();
+
 	}
 
 	GameManager::~GameManager() {
+
+		ScreenManager::Release();
+		mScreenManager = NULL;
 
 		AudioManager::Release();
 		mAudioManager = NULL;
@@ -56,8 +60,6 @@ namespace EngineSDL {
 		Timer::Release();
 		mTimer = NULL;
 
-		delete mStartScreen;
-		mStartScreen = NULL;
 
 
 	}
@@ -72,7 +74,7 @@ namespace EngineSDL {
 
 	void GameManager::Update() {
 		//Game objects update here
-		mStartScreen->Update();
+		mScreenManager->Update();
 
 	}
 
@@ -86,7 +88,7 @@ namespace EngineSDL {
 		mGraphics->ClearBackBuffer();
 
 		//all rendering here
-		mStartScreen->Render();
+		mScreenManager->Render();
 
 		mGraphics->Render();
 	}

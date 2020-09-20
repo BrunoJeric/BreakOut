@@ -6,15 +6,24 @@ StartScreen::StartScreen() {
 	mInputManager = InputManager::Instance();
 	//Top bar
 	mTopBar = new GameEntity(Vector2(Graphics::Instance()->SCREEN_WIDTH*0.5f, 45.0f));
-	mPlayerOne = new Texture("1UP", "emulogic.ttf", 24, { 255,255,255 });
-	mHighScore = new Texture("HI-SCORE", "emulogic.ttf", 24, {255,255,255 });
+	mPlayerOne = new Texture("1UP", "emulogic.ttf", 24, { 251,35,35});
+	mHighScore = new Texture("HI-SCORE", "emulogic.ttf", 24, {251,35,35});
+	mPlayerOneScore = new ScoreBoard();
+	mTopScore = new ScoreBoard();
 
 
 	mHighScore->Parent(mTopBar);
 	mPlayerOne->Parent(mTopBar);
+	mPlayerOneScore->Parent(mTopBar);
+	mTopScore->Parent(mTopBar);
 
-	mHighScore -> Pos(Vector2(-30.0f,0.0f));
+	mHighScore -> Pos(Vector2(30.0f,0.0f));
 	mPlayerOne->Pos(Vector2(-Graphics::Instance()->SCREEN_WIDTH * 0.35f, 0.0f));
+
+	mPlayerOneScore->Pos(Vector2(-Graphics::Instance()->SCREEN_WIDTH * 0.23f, 35.0f));
+	mTopScore->Pos(Vector2(Graphics::Instance()->SCREEN_WIDTH * 0.15f, 35.0f));
+	mPlayerOneScore->Score(15236);
+	mTopScore->Score(30000);
 	
 	mTopBar->Parent(this);
 
@@ -51,7 +60,7 @@ StartScreen::StartScreen() {
 	//Bottom Bar
 	mBottomBar = new GameEntity(Vector2(Graphics::Instance()->SCREEN_WIDTH * 0.5f, Graphics::Instance()->SCREEN_HEIGHT * 0.9f));
 	mDate = new Texture("19.09.2020", "emulogic.ttf", 20, { 230,230,230 });
-	mCreds = new Texture("Bruno Jeric", "emulogic.ttf", 16, { 100,0,0 });
+	mCreds = new Texture("Bruno Jeric", "emulogic.ttf", 16, { 251,35,35 });
 
 	mDate->Parent(mBottomBar);
 	mCreds->Parent(mBottomBar);
@@ -62,13 +71,7 @@ StartScreen::StartScreen() {
 	mBottomBar->Parent(this);
 
 	//Animation
-	mAnimationStartPosition = Vector2(0.0f, Graphics::Instance()->SCREEN_HEIGHT);
-	mAnimationEndPosition = VEC_ZERO;
-	mAnimationTotalTime = 5.0f;
-	mAnimationTimer = 0.0f;
-	mAnimationDone = false;
-
-	Pos(mAnimationStartPosition);
+	ResetAnimation();
 }
 
 StartScreen::~StartScreen() {
@@ -79,6 +82,10 @@ StartScreen::~StartScreen() {
 	mPlayerOne= NULL;
 	delete mHighScore;
 	mHighScore = NULL;
+	delete mTopScore;
+	mTopScore = NULL;
+	delete mPlayerOneScore;
+	mPlayerOneScore = NULL;
 
 	//logo cleanup
 	delete mLogo;
@@ -108,13 +115,25 @@ StartScreen::~StartScreen() {
 void StartScreen::ChangeSelection(int change) {
 	mSelection += change;
 	if (mSelection <= 0)
-		mSelection = 1;
-	else if (mSelection > 1)
 		mSelection = 0;
+	else if (mSelection > 1)
+		mSelection = 1;
 
 	mCursor->Pos(mCursorStartPos + mCursorOffset * mSelection);
 }
+void StartScreen::ResetAnimation() {
+	mAnimationStartPosition = Vector2(0.0f, Graphics::Instance()->SCREEN_HEIGHT);
+	mAnimationEndPosition = VEC_ZERO;
+	mAnimationTotalTime = 5.0f;
+	mAnimationTimer = 0.0f;
+	mAnimationDone = false;
 
+	Pos(mAnimationStartPosition);
+}
+
+int StartScreen::SelectedScreen() {
+	return mSelection;
+}
 void StartScreen::Update(){
 	
 	if (!mAnimationDone) {
@@ -141,6 +160,8 @@ void StartScreen::Update(){
 void StartScreen::Render() {
 	mHighScore->Render();
 	mPlayerOne->Render();
+	mPlayerOneScore->Render();
+	mTopScore->Render();
 
 	if (!mAnimationDone)
 		mLogo->Render();

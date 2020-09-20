@@ -1,7 +1,7 @@
 #pragma once
 #include "Timer.h"
 #include "AudioManager.h"
-#include "StartScreen.h"
+#include "ScreenManager.h"
 namespace EngineSDL {
 	class GameManager {
 	private:
@@ -22,7 +22,7 @@ namespace EngineSDL {
 		//catch exit event
 		SDL_Event mEvents;
 
-		StartScreen* mStartScreen;
+		ScreenManager* mScreenManager;
 
 	public:
 		static GameManager* Instance();

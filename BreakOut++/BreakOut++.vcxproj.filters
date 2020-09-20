@@ -66,6 +66,18 @@
     <ClCompile Include="StartScreen.cpp">
       <Filter>Source Files\BreakOut</Filter>
     </ClCompile>
+    <ClCompile Include="ScoreBoard.cpp">
+      <Filter>Source Files\BreakOut</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenManager.cpp">
+      <Filter>Source Files\BreakOut</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayScreen.cpp">
+      <Filter>Source Files\BreakOut</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaySideBar.cpp">
+      <Filter>Source Files\BreakOut</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Timer.h">
@@ -99,6 +111,18 @@
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="StartScreen.h">
+      <Filter>Header Files\BreakOut</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreBoard.h">
+      <Filter>Header Files\BreakOut</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenManager.h">
+      <Filter>Header Files\BreakOut</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayScreen.h">
+      <Filter>Header Files\BreakOut</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaySideBar.h">
       <Filter>Header Files\BreakOut</Filter>
     </ClInclude>
   </ItemGroup>
