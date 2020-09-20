@@ -3,6 +3,7 @@
 StartScreen::StartScreen() {
 
 	mTimer = Timer::Instance();
+	mInputManager = InputManager::Instance();
 	//Top bar
 	mTopBar = new GameEntity(Vector2(Graphics::Instance()->SCREEN_WIDTH*0.5f, 45.0f));
 	mPlayerOne = new Texture("1UP", "emulogic.ttf", 24, { 255,255,255 });
@@ -30,11 +31,22 @@ StartScreen::StartScreen() {
 	//Start game
 	mPlay = new GameEntity(Vector2(Graphics::Instance()->SCREEN_WIDTH * 0.5f, Graphics::Instance()->SCREEN_HEIGHT * 0.55f));
 	mStartGame = new Texture("Start Game", "emulogic.ttf", 24, { 230,230,230 });
+	mQuitGame = new Texture("Quit Game", "emulogic.ttf", 24, { 230,230,230 });
+	mCursor = new Texture("cursor.png");
 	mStartGame->Parent(mPlay);
+	mQuitGame->Parent(mPlay);
+	mCursor->Parent(mPlay);
+	mCursor->Scale(Vector2(0.5f, 0.35f));
 
-	mStartGame->Pos(VEC_ZERO);
+	mCursor->Pos(Vector2(-135.0f, 18.0f));
+	mStartGame->Pos(Vector2(0.0f, 15.0f));
+	mQuitGame->Pos(Vector2(-11.0f, 60.0f));
 
 	mPlay->Parent(this);
+
+	mCursorStartPos = mCursor->Pos(local);
+	mCursorOffset = Vector2(0.0f,45.0f);
+	mSelection = 0;
 
 	//Bottom Bar
 	mBottomBar = new GameEntity(Vector2(Graphics::Instance()->SCREEN_WIDTH * 0.5f, Graphics::Instance()->SCREEN_HEIGHT * 0.9f));
@@ -79,6 +91,10 @@ StartScreen::~StartScreen() {
 	mPlay = NULL;
 	delete mStartGame;
 	mStartGame = NULL;
+	delete mQuitGame;
+	mQuitGame = NULL;
+	delete mCursor;
+	mCursor = NULL;
 
 	//bottom bar cleanup
 	delete mBottomBar;
@@ -87,6 +103,16 @@ StartScreen::~StartScreen() {
 	mDate = NULL;
 	delete mCreds;
 	mCreds = NULL;
+}
+
+void StartScreen::ChangeSelection(int change) {
+	mSelection += change;
+	if (mSelection <= 0)
+		mSelection = 1;
+	else if (mSelection > 1)
+		mSelection = 0;
+
+	mCursor->Pos(mCursorStartPos + mCursorOffset * mSelection);
 }
 
 void StartScreen::Update(){
@@ -101,6 +127,13 @@ void StartScreen::Update(){
 	}
 	else {
 		mAnimatedLogo->Update();
+
+		if (mInputManager->KeyPressed(SDL_SCANCODE_DOWN)) {
+			ChangeSelection(1);
+		}
+		else if (mInputManager->KeyPressed(SDL_SCANCODE_UP)) {
+			ChangeSelection(-1);
+		}
 	}
 
 }
@@ -116,6 +149,8 @@ void StartScreen::Render() {
 
 	
 	mStartGame->Render();
+	mQuitGame->Render();
+	mCursor->Render();
 
 	mDate->Render();
 	mCreds->Render();

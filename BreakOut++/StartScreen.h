@@ -8,6 +8,7 @@ class StartScreen : public GameEntity {
 
 private:
 	Timer* mTimer;
+	InputManager* mInputManager;
 
 	//Top bar
 	GameEntity* mTopBar;
@@ -21,6 +22,12 @@ private:
 	//Start game
 	GameEntity* mPlay;
 	Texture* mStartGame;
+	Texture* mQuitGame;
+	Texture* mCursor;
+	Vector2 mCursorStartPos;
+	Vector2 mCursorOffset;
+	int mSelection;
+
 
 	//Bottom bar
 	GameEntity* mBottomBar;
@@ -37,6 +44,8 @@ private:
 public:
 	StartScreen();
 	~StartScreen();
+
+	void ChangeSelection(int change);
 
 	void Update();
 
