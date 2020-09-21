@@ -9,8 +9,7 @@ Your mission is to break as many bricks as you can, and set highest score.
 
 ## Usage
 
-Move platform with left and right keys
-Deploy ball with spacebar
+Move platform with left and right keys, and deploy ball with spacebar
 
 ## Tehnologies
 Project made using Visual Studio 2019 Community Edition.
