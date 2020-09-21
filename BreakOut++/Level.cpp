@@ -134,6 +134,10 @@ void Level::HandlePlayerDeath() {
 	}
 }
 
+Level::LEVEL_STATES Level::State() {
+	return mCurrentState;
+}
+
 void Level::Update() {
 	if (!mLevelStarted) {
 		HandleStartLabels();
@@ -141,12 +145,15 @@ void Level::Update() {
 	else {
 		HandleCollisions();
 
-		if (mBallDropped)
-			HandlePlayerDeath();
+		if (mBallDropped) {
 
-		if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_N)) {
-			mCurrentState = finished;
+			HandlePlayerDeath();
+		} else{
+			if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_N)) {
+				mCurrentState = finished;
+			}
 		}
+		
 	}
 }
 

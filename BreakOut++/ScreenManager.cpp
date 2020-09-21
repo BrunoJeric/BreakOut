@@ -48,9 +48,11 @@ void ScreenManager::Update() {
 		break;
 	case play:
 		mPlayScreen->Update();
-		if (mInputManager->KeyPressed(SDL_SCANCODE_ESCAPE)) {
+		
+		if (mPlayScreen->GameOver()) {
 			mCurrentScreen = start;
 		}
+
 		break;
 	}
 }
