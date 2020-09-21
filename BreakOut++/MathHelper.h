@@ -32,6 +32,10 @@ namespace EngineSDL {
 			return *this;
 		}
 
+		Vector2 operator -() const {
+			return Vector2(-x, -y);
+		}
+
 	};
 	inline Vector2 operator +(const Vector2& left, const Vector2& right) {
 		return Vector2(left.x + right.x, left.y + right.y);

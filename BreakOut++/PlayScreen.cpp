@@ -14,8 +14,11 @@ PlayScreen::PlayScreen() {
 	mStartLabel->Pos(Vector2(Graphics::Instance()->SCREEN_WIDTH * 0.6f, Graphics::Instance()->SCREEN_HEIGHT * 0.5f));
 
 	mLevel = NULL;
+	mLevelStartTimer = 0.0f;
 	mLevelStartDelay = 1.0f;
 	mLevelStarted = false;
+
+	mPlayer = NULL;
 }
 
 PlayScreen::~PlayScreen() {
@@ -31,11 +34,21 @@ PlayScreen::~PlayScreen() {
 
 	delete mLevel;
 	mLevel = NULL;
+
+	delete mPlayer;
+	mPlayer = NULL;
 }
 
 void PlayScreen::StartNewGame() {
+
+	delete mPlayer;
+	mPlayer = new Player();
+	mPlayer->Parent(this);
+	mPlayer->Pos(Vector2(521.0f,Graphics::Instance()->SCREEN_HEIGHT*0.95f));
+	mPlayer->Active(false);
 	mSideBar->SetHighScore(30000);
-	mSideBar->SetLifes(3);
+	mSideBar->SetLifes(mPlayer->Lives());
+	mSideBar->SetPlayerScore(mPlayer->Score());
 	mGameStarted = false;
 	mAudioManager->PlayMusic("gameStart.wav", 0);
 	mCurrentLevel = 0;
@@ -48,7 +61,7 @@ void PlayScreen::StartNextLevel() {
 	
 
 	delete mLevel;
-	mLevel = new Level(mCurrentLevel, mSideBar);
+	mLevel = new Level(mCurrentLevel, mSideBar,mPlayer);
 	//maybe remove sound 
 	mAudioManager->PlaySFX("levelReady.wav");
 
@@ -72,10 +85,15 @@ void PlayScreen::Update(){
 		}
 	}
 
-	if (mGameStarted && mLevelStarted)
+	if (mGameStarted)
 	{
-		mSideBar->Update();
-		mLevel->Update();
+		if(mCurrentLevel>0)
+			mSideBar->Update();
+
+		if(mLevelStarted)
+			mLevel->Update();
+
+		mPlayer->Update();
 	}
 	
 }
@@ -84,7 +102,10 @@ void PlayScreen::Render() {
 	if (!mGameStarted) {
 		mStartLabel->Render();
 	}
-	if (mGameStarted && mLevelStarted) {
-		mLevel->Render();
+	if (mGameStarted) {
+		if(mLevelStarted)
+			mLevel->Render();
+		
+		mPlayer->Render();
 	}
 }

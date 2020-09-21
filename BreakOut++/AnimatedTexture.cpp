@@ -24,6 +24,15 @@ namespace EngineSDL {
 		mWrapMode = mode;
 	}
 
+	void AnimatedTexture::ResetAnimation() {
+		mAnimationTimer = 0.0f;
+		mAnimationDone = false;
+	}
+
+	bool AnimatedTexture::IsAnimating() {
+		return !mAnimationDone;
+	}
+
 	void AnimatedTexture::Update() {
 
 		if (!mAnimationDone) {

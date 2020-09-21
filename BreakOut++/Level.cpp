@@ -1,6 +1,6 @@
 #include "Level.h"
 
-Level::Level(int level, PlaySideBar* sideBar) {
+Level::Level(int level, PlaySideBar* sideBar,Player* player) {
 	
 	mTimer = Timer::Instance();
 	
@@ -29,7 +29,24 @@ Level::Level(int level, PlaySideBar* sideBar) {
 	mReadyLabel->Pos(Vector2(Graphics::Instance()->SCREEN_WIDTH * 0.62f, Graphics::Instance()->SCREEN_HEIGHT * 0.5f));
 
 	mReadyLabelOnScreen = mLevelLabelOffScreen;
-	mReadyLabelOffScreen = mReadyLabelOnScreen + 2.0f;
+	mReadyLabelOffScreen = mReadyLabelOnScreen + 3.0f;
+
+	mPlayer = player;
+	mBallDropped = false;
+	mPlayerRespawnDelay=3.0f;
+	mPlayerRespawnTimer = 0.0f;
+	mPlayerRespawnLabelOnScreen = 2.0f;
+
+	mGameOverLabel = new Texture("GAME OVER", "emulogic.ttf", 32, { 150,0,0 });
+	mGameOverLabel->Parent(this);
+	mGameOverLabel->Pos(Vector2(Graphics::Instance()->SCREEN_WIDTH * 0.62f, Graphics::Instance()->SCREEN_HEIGHT * 0.5f));
+
+	mGameOver = false;
+	mGameOverDelay = 4.0f;
+	mGameOverTimer = 0.0f;
+	mGameOverLabelOnScreen = 1.0f;
+
+	mCurrentState = running;
 }
 
 Level::~Level() {
@@ -43,36 +60,116 @@ Level::~Level() {
 
 	delete mReadyLabel;
 	mReadyLabel = NULL;
+
+	mPlayer = NULL;
+
+	delete mGameOverLabel;
+	mGameOverLabel = NULL;
 }
 
 void Level::StartLevel() {
 	mLevelStarted = true;
 }
 
-void Level::Update() {
-	if (!mLevelStarted) {
-		mLabelTimer += mTimer->DeltaTime();
-		if (mLabelTimer >= mLevelLabelOffScreen) {
-			if (mLevel > 1) {
+void Level::HandleStartLabels() {
+	mLabelTimer += mTimer->DeltaTime();
+	if (mLabelTimer >= mLevelLabelOffScreen) {
+		if (mLevel > 1) {
+			StartLevel();
+		}
+		else {
+			if (mLabelTimer >= mReadyLabelOffScreen) {
+
 				StartLevel();
-			}
-			else {
-				if (mLabelTimer >= mReadyLabelOffScreen) {
-					StartLevel();
-				}
+				mPlayer->Active(true);
+				mPlayer->Visible(true);
 			}
 		}
 	}
 }
+
+void Level::HandleCollisions() {
+	if (!mBallDropped) {
+		if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_X)) {
+			mPlayer->DroppedBall();
+			mSideBar->SetLifes(mPlayer->Lives());
+
+			mBallDropped = true;
+			mPlayerRespawnTimer = 0.0f;
+			mPlayer->Active(false);
+		}
+	}
+}
+
+void Level::HandlePlayerDeath() {
+
+	if (!mPlayer->IsAnimating()) {
+
+		if (mPlayer->Lives() > 0) {
+			
+			if (mPlayerRespawnTimer == 0.0f) {
+				mPlayer->Visible(false);
+
+			}
+			mPlayerRespawnTimer += mTimer->DeltaTime();
+
+			if (mPlayerRespawnTimer >= mPlayerRespawnDelay) {
+				mPlayer->Active(true);
+				mPlayer->Visible(true);
+				mBallDropped = false;
+
+
+			}
+		}
+		else {
+			if (mGameOver == 0.0f)
+				mPlayer->Visible(false);
+
+			mGameOverTimer += mTimer->DeltaTime();
+			if (mGameOverTimer >= mGameOverDelay) {
+				mCurrentState = gameover;
+			}
+		}
+
+	}
+}
+
+void Level::Update() {
+	if (!mLevelStarted) {
+		HandleStartLabels();
+	}
+	else {
+		HandleCollisions();
+
+		if (mBallDropped)
+			HandlePlayerDeath();
+
+		if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_N)) {
+			mCurrentState = finished;
+		}
+	}
+}
+
 
 void Level::Render() {
 	if (!mLevelStarted) {
 		if (mLabelTimer > mLevelLabelOnScreen && mLabelTimer < mLevelLabelOffScreen) {
 			mLevelLabel->Render();
 			mLevelNumber->Render();
-		}
-		else if (mLabelTimer > mReadyLabelOnScreen && mLabelTimer < mReadyLabelOffScreen) {
+		} else if (mLabelTimer > mReadyLabelOnScreen && mLabelTimer < mReadyLabelOffScreen) {
+
 			mReadyLabel->Render();
+		
+		}
+	}
+	else
+	{
+		if (mBallDropped) {
+			if (mPlayerRespawnTimer >= mPlayerRespawnLabelOnScreen)
+				mReadyLabel->Render();
+
+			if (mGameOverTimer >= mGameOverLabelOnScreen)
+				mGameOverLabel->Render();
 		}
 	}
 }

@@ -27,6 +27,7 @@ private:
 	bool mLevelStarted;
 	int mCurrentLevel;
 
+	Player* mPlayer;
 private:
 	void StartNextLevel();
 public:
