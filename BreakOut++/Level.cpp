@@ -1,6 +1,6 @@
 #include "Level.h"
 
-Level::Level(int level, PlaySideBar* sideBar,Player* player) {
+Level::Level(int level, PlaySideBar* sideBar,Player* player,Ball* ball) {
 	
 	mTimer = Timer::Instance();
 	
@@ -30,6 +30,8 @@ Level::Level(int level, PlaySideBar* sideBar,Player* player) {
 
 	mReadyLabelOnScreen = mLevelLabelOffScreen;
 	mReadyLabelOffScreen = mReadyLabelOnScreen + 3.0f;
+
+	mBall = ball;
 
 	mPlayer = player;
 	mBallDropped = false;
@@ -62,6 +64,7 @@ Level::~Level() {
 	mReadyLabel = NULL;
 
 	mPlayer = NULL;
+	mBall = NULL;
 
 	delete mGameOverLabel;
 	mGameOverLabel = NULL;
@@ -83,6 +86,9 @@ void Level::HandleStartLabels() {
 				StartLevel();
 				mPlayer->Active(true);
 				mPlayer->Visible(true);
+
+				mBall->Active(true);
+				mBall->Visible(true);
 			}
 		}
 	}
@@ -97,6 +103,7 @@ void Level::HandleCollisions() {
 			mBallDropped = true;
 			mPlayerRespawnTimer = 0.0f;
 			mPlayer->Active(false);
+			mBall->Active(false);
 		}
 	}
 }
@@ -109,13 +116,17 @@ void Level::HandlePlayerDeath() {
 			
 			if (mPlayerRespawnTimer == 0.0f) {
 				mPlayer->Visible(false);
-
+				mBall->Visible(false);
 			}
 			mPlayerRespawnTimer += mTimer->DeltaTime();
 
 			if (mPlayerRespawnTimer >= mPlayerRespawnDelay) {
 				mPlayer->Active(true);
 				mPlayer->Visible(true);
+
+				mBall->Active(true);
+				mBall->Visible(true);
+
 				mBallDropped = false;
 
 
@@ -148,7 +159,15 @@ void Level::Update() {
 		if (mBallDropped) {
 
 			HandlePlayerDeath();
+
 		} else{
+			if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_SPACE)) {
+				mBall->Parent(this);
+				mBall->Docked(false);
+			}
+			if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_R)) {
+				mBall->RotateDirVec(45.0f);
+			}
 			if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_N)) {
 				mCurrentState = finished;
 			}

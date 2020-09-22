@@ -28,6 +28,8 @@ private:
 	int mCurrentLevel;
 
 	Player* mPlayer;
+	Ball* mBall;
+
 private:
 	void StartNextLevel();
 public:

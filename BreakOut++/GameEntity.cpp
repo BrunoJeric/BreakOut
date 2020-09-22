@@ -108,8 +108,13 @@ namespace EngineSDL {
 		mParent = parent;
 	}
 
-	void GameEntity::Translate(Vector2 vec) {
-		mPos += vec;
+	void GameEntity::Translate(Vector2 vec,SPACE space) {
+		if (space == world) {
+			mPos += vec;
+		}
+		else {
+			mPos += RotateVector(vec, Rotation());
+		}	
 	}
 
 	void GameEntity::Rotate(float amount) {

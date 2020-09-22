@@ -2,6 +2,7 @@
 #include "InputManager.h"
 #include "PlaySideBar.h"
 #include "Player.h"
+#include "Ball.h"
 
 class Level : GameEntity {
 
@@ -27,6 +28,7 @@ private:
 	float mReadyLabelOffScreen;
 
 	Player* mPlayer;
+	Ball* mBall;
 
 	bool mBallDropped;
 	float mPlayerRespawnDelay;
@@ -50,7 +52,7 @@ private:
 	void HandlePlayerDeath();
 
 public:
-	Level(int level, PlaySideBar* sideBar,Player* player);
+	Level(int level, PlaySideBar* sideBar,Player* player, Ball* ball);
 	~Level();
 
 	LEVEL_STATES State();

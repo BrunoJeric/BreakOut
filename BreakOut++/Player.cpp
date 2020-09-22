@@ -38,10 +38,10 @@ Player::~Player(){
 
 void Player::HandleMovment() {
 	if (mInput->KeyDown(SDL_SCANCODE_RIGHT)) {
-		Translate(VEC_RIGHT * mMoveSpeed * mTimer->DeltaTime());
+		Translate(VEC_RIGHT * mMoveSpeed * mTimer->DeltaTime(),world);
 	}
 	else if (mInput->KeyDown(SDL_SCANCODE_LEFT)) {
-		Translate(-VEC_RIGHT * mMoveSpeed * mTimer->DeltaTime());
+		Translate(-VEC_RIGHT * mMoveSpeed * mTimer->DeltaTime(),world);
 
 	}
 
