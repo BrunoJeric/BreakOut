@@ -80,6 +80,7 @@ void PlayScreen::StartNextLevel() {
 	
 
 	delete mLevel;
+	
 	mLevel = new Level(mCurrentLevel, mSideBar,mPlayer,mBall);
 	//maybe remove sound 
 	mAudioManager->PlaySFX("levelReady.wav");

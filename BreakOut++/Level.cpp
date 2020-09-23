@@ -1,9 +1,8 @@
-#include "Level.h"
+﻿#include "Level.h"
 
 Level::Level(int level, PlaySideBar* sideBar,Player* player,Ball* ball) {
 	
 	mTimer = Timer::Instance();
-	
 	mSideBar = sideBar;
 	mSideBar->SetLevel(level);
 
@@ -48,6 +47,8 @@ Level::Level(int level, PlaySideBar* sideBar,Player* player,Ball* ball) {
 	mGameOverTimer = 0.0f;
 	mGameOverLabelOnScreen = 1.0f;
 
+	ParseXml();
+
 	mCurrentState = running;
 }
 
@@ -68,6 +69,7 @@ Level::~Level() {
 
 	delete mGameOverLabel;
 	mGameOverLabel = NULL;
+
 }
 
 void Level::StartLevel() {
@@ -93,6 +95,8 @@ void Level::HandleStartLabels() {
 		}
 	}
 }
+
+
 
 void Level::HandleCollisions() {
 	if (!mBallDropped) {
@@ -148,6 +152,25 @@ void Level::HandlePlayerDeath() {
 Level::LEVEL_STATES Level::State() {
 	return mCurrentState;
 }
+void Level::ParseXml() {
+	XMLDocument doc;
+	std::string fullpath = SDL_GetBasePath();
+	fullpath.append("Assets/Level/level_" + std::to_string(mLevel) + ".xml");
+	doc.LoadFile(fullpath.c_str());
+	const XMLDocument& cdoc = doc;
+	
+	mRowCount = atoi(cdoc.FirstChildElement("Level")->FindAttribute("RowCount")->Value());
+	mColumnCount = atoi(cdoc.FirstChildElement("Level")->FindAttribute("ColumnCount")->Value());
+	mRowSpacing = atoi(cdoc.FirstChildElement("Level")->FindAttribute("RowSpacing")->Value());
+	mColumnSpacing = atoi(cdoc.FirstChildElement("Level")->FindAttribute("ColumnSpacing")->Value());
+	mColumnSpacing =atoi(cdoc.FirstChildElement("Level")->FindAttribute("ColumnSpacing")->Value());
+	mBackgroundTexture = cdoc.FirstChildElement("Level")->FindAttribute("BackgroundTexture")->Value();
+	int a=5;
+}
+void Level::GetBricksOnScreen() {
+	
+	
+}
 
 void Level::Update() {
 	if (!mLevelStarted) {
@@ -155,7 +178,7 @@ void Level::Update() {
 	}
 	else {
 		HandleCollisions();
-
+		GetBricksOnScreen();
 		if (mBallDropped) {
 
 			HandlePlayerDeath();

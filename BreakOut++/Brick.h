@@ -9,10 +9,8 @@ class Brick : GameEntity {
 public:
 	enum TYPES {soft,medium,hard,impenetrable};
 
-private:
+protected:
 	Texture* mTexture;
-	
-	char mId;
 	
 	std::string mHitSound;
 	std::string mBreakSound;
@@ -21,8 +19,13 @@ private:
 	int mHitpoints;
 	int mBreakScore;
 
+	TYPES mType;
+
 public:
-	Brick();
-	~Brick();
+	Brick( std::string hitSound, std::string breakSound, std::string texturePath, int hitPoints,int breakScore);
+	virtual ~Brick();
+
+	void Update();
+	void Render();
 
 };

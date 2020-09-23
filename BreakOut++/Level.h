@@ -41,7 +41,17 @@ private:
 	float mGameOverTimer;
 	float  mGameOverLabelOnScreen;
 
+
+	int mRowCount;
+	int	mColumnCount;
+	int	mRowSpacing;
+	int	mColumnSpacing;
+	std::string	mBackgroundTexture;
+	
 	LEVEL_STATES mCurrentState;	
+
+
+
 
 private:
 
@@ -50,6 +60,8 @@ private:
 	void HandleStartLabels();
 	void HandleCollisions();
 	void HandlePlayerDeath();
+	void GetBricksOnScreen();
+	void ParseXml();
 
 public:
 	Level(int level, PlaySideBar* sideBar,Player* player, Ball* ball);

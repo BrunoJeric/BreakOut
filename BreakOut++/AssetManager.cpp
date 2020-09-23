@@ -51,6 +51,14 @@ namespace EngineSDL {
 			}
 		}
 		mSFX.clear();
+
+		/*for (auto level : mLevels) {
+			if (level.second != NULL) {
+				delete level.second;
+				level.second = NULL;
+			}
+		}
+		mLevels.clear();*/
 	}
 
 	SDL_Texture* AssetManager::GetTexture(std::string filename) {
@@ -127,4 +135,26 @@ namespace EngineSDL {
 		}
 		return mSFX[fullpath];
 	}
+
+	//XMLDocument* AssetManager::GetLevel(std::string filename) {
+	//	std::string fullpath = SDL_GetBasePath();
+	//	fullpath.append("Assets/Level/" + filename);
+	//	XMLDocument doc;
+
+	//	if (mLevels[fullpath] == nullptr) {
+	//		doc.LoadFile(fullpath.c_str());
+
+	//		const XMLDocument& cdoc = doc;
+
+	//		const XMLAttribute* attrib = cdoc.FirstChildElement("Level")->FindAttribute("RowCount");
+
+	//		std::cout << doc.ErrorIDToName(doc.ErrorID())<< attrib->Value()<<std::endl;
+	//		mLevels[fullpath]=&doc;
+	//		if (mLevels[fullpath] == NULL) {
+	//			std::cout << "Level Loading Error: File(" << filename.c_str() << ")" << std::endl;
+
+	//		}
+	//	}
+	//	return mLevels[fullpath];
+	//}
 }
