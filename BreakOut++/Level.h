@@ -3,6 +3,8 @@
 #include "PlaySideBar.h"
 #include "Player.h"
 #include "Ball.h"
+#include "Brick.h"
+#include <vector>
 
 class Level : GameEntity {
 
@@ -41,13 +43,17 @@ private:
 	float mGameOverTimer;
 	float  mGameOverLabelOnScreen;
 
-
+	//int mBrickTypes;
 	int mRowCount;
 	int	mColumnCount;
 	int	mRowSpacing;
 	int	mColumnSpacing;
 	std::string	mBackgroundTexture;
+
+	std::vector<Brick*> mBrickTypes;
+	std::vector<Brick*> mBricks;
 	
+	GameEntity* mBrickContainer;
 	LEVEL_STATES mCurrentState;	
 
 

@@ -90,18 +90,6 @@
     <ClCompile Include="Brick.cpp">
       <Filter>Source Files\BreakOut</Filter>
     </ClCompile>
-    <ClCompile Include="SoftBrick.cpp">
-      <Filter>Source Files\BreakOut</Filter>
-    </ClCompile>
-    <ClCompile Include="MediumBrick.cpp">
-      <Filter>Source Files\BreakOut</Filter>
-    </ClCompile>
-    <ClCompile Include="HardBrick.cpp">
-      <Filter>Source Files\BreakOut</Filter>
-    </ClCompile>
-    <ClCompile Include="ImpenetrableBrick.cpp">
-      <Filter>Source Files\BreakOut</Filter>
-    </ClCompile>
     <ClCompile Include="tinyxml2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -162,18 +150,6 @@
       <Filter>Header Files\BreakOut</Filter>
     </ClInclude>
     <ClInclude Include="Brick.h">
-      <Filter>Header Files\BreakOut</Filter>
-    </ClInclude>
-    <ClInclude Include="SoftBrick.h">
-      <Filter>Header Files\BreakOut</Filter>
-    </ClInclude>
-    <ClInclude Include="MediumBrick.h">
-      <Filter>Header Files\BreakOut</Filter>
-    </ClInclude>
-    <ClInclude Include="HardBrick.h">
-      <Filter>Header Files\BreakOut</Filter>
-    </ClInclude>
-    <ClInclude Include="ImpenetrableBrick.h">
       <Filter>Header Files\BreakOut</Filter>
     </ClInclude>
     <ClInclude Include="tinyxml2.h">

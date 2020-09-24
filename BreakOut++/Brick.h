@@ -4,10 +4,9 @@
 
 using namespace EngineSDL;
 
-class Brick : GameEntity {
+class Brick : public GameEntity {
 
 public:
-	enum TYPES {soft,medium,hard,impenetrable};
 
 protected:
 	Texture* mTexture;
@@ -19,11 +18,15 @@ protected:
 	int mHitpoints;
 	int mBreakScore;
 
-	TYPES mType;
+	char mId;
+
 
 public:
-	Brick( std::string hitSound, std::string breakSound, std::string texturePath, int hitPoints,int breakScore);
-	virtual ~Brick();
+	Brick(char id, std::string hitSound, std::string breakSound, std::string texturePath, int hitPoints,int breakScore);
+	~Brick();
+	char Id();
+
+	Brick* Clone();
 
 	void Update();
 	void Render();
