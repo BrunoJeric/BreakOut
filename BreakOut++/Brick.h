@@ -19,13 +19,15 @@ protected:
 	int mHitpoints;
 	int mBreakScore;
 
-	char mId;
+	char mBId;
 
 
 public:
 	Brick(char id, std::string hitSound, std::string breakSound, std::string texturePath, int hitPoints,int breakScore);
 	~Brick();
 	char Id();
+
+	void Hit(PhysEntity* other) override;
 
 	Brick* Clone();
 

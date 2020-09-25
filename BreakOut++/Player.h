@@ -34,6 +34,9 @@ public:
 	~Player();
 
 	void Visible(bool visible);
+
+	void Hit(PhysEntity* other) override;
+
 	bool IsAnimating();
 
 	int Score();

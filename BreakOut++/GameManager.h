@@ -2,6 +2,7 @@
 #include "Timer.h"
 #include "AudioManager.h"
 #include "ScreenManager.h"
+#include "PhysicsManager.h"
 namespace EngineSDL {
 	class GameManager {
 	private:
@@ -16,6 +17,7 @@ namespace EngineSDL {
 		AssetManager* mAssetManager;
 		InputManager* mInputManager;
 		AudioManager* mAudioManager;
+		PhysicsManager* mPhysicsManager;
 
 
 		Timer* mTimer;

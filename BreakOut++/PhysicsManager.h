@@ -32,7 +32,7 @@ public:
 	static PhysicsManager* Instance();
 	static void Release();
 
-	void SetLayerCollisionMask(CollisionLayers layer, CollisonFlags flag);
+	void SetLayerCollisionMask(CollisionLayers layer, CollisonFlags flags);
 
 	unsigned long RegisterEntity(PhysEntity* entity, CollisionLayers layer);
 

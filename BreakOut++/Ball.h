@@ -32,6 +32,11 @@ public:
 	void Visible(bool visible);
 	bool Visible();
 
+	void Hit(PhysEntity* other) override;
+
+	void Direction(Vector2 dir);
+	Vector2 Direction();
+
 	void RotateDirVec(float amount);
 
 	void Update();

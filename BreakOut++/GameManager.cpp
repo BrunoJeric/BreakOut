@@ -36,6 +36,14 @@ namespace EngineSDL {
 		//Initialize Timer
 		mTimer = Timer::Instance();
 
+		mPhysicsManager = PhysicsManager::Instance();
+
+		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::PlatformLayer, PhysicsManager::CollisonFlags::BallLayer);
+		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::BallLayer, PhysicsManager::CollisonFlags::PlatformLayer| PhysicsManager::CollisonFlags::BrickLayer);
+		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::BrickLayer, PhysicsManager::CollisonFlags::BallLayer); 
+
+
+
 		mScreenManager = ScreenManager::Instance();
 
 	}
@@ -44,6 +52,9 @@ namespace EngineSDL {
 
 		ScreenManager::Release();
 		mScreenManager = NULL;
+
+		PhysicsManager::Release();
+		mPhysicsManager = NULL;
 
 		AudioManager::Release();
 		mAudioManager = NULL;
@@ -80,6 +91,7 @@ namespace EngineSDL {
 
 	void GameManager::LateUpdate() {
 
+		mPhysicsManager->Update();
 		mInputManager->UpdatePreviousInput();
 	}
 

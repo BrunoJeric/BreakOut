@@ -1,5 +1,7 @@
 #include "Ball.h"
 #include "CircleCollider.h"
+#include "BoxCollider.h"
+#include "PhysicsManager.h"
 Ball::Ball() {
 	mTimer = Timer::Instance();
 	mDocked = false;
@@ -12,7 +14,11 @@ Ball::Ball() {
 	mUDBounds = Vector2(25.0f, 620.0f);
 	mLRBounds = Vector2(181.0f, 843.0f);
 
-	AddCollider(new CircleCollider(25.0f));
+	//AddCollider(new CircleCollider(25.0f));
+	AddCollider(new BoxCollider(mBallTexture->ScaledDimensions()));
+
+	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::BallLayer);
+
 }
 
 Ball::~Ball() {
@@ -24,6 +30,11 @@ Ball::~Ball() {
 void Ball::Visible(bool visible) {
 	mVisible = visible;
 }
+
+void Ball::Hit(PhysEntity* other) {
+	mDirection=Vector2(mDirection.x, -mDirection.y);
+}
+
 void Ball::Docked(bool docked) {
 	mDocked = docked;
 }
@@ -46,6 +57,13 @@ void Ball::TranslateAndHandlePlayArea() {
 		mDirection = Vector2(-mDirection.x, mDirection.y);
 	}
 	Translate(mDirection * mSpeed * mTimer->DeltaTime(), local);
+}
+
+void Ball::Direction(Vector2 dir) {
+	mDirection = dir;
+}
+Vector2 Ball::Direction(){
+	return mDirection;
 }
 void Ball::Update() {
 	if (Active()) {

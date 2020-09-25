@@ -18,6 +18,10 @@ public:
 
 	unsigned long GetId();
 
+	bool CheckCollision(PhysEntity* other);
+
+	virtual void Hit(PhysEntity* other);
+
 	virtual void Render();
 
 protected:

@@ -1,5 +1,7 @@
 #include "Player.h"
 #include "BoxCollider.h"
+#include "Ball.h"
+#include "PhysicsManager.h"
 
 Player::Player(){
 	mTimer = Timer::Instance();
@@ -26,6 +28,8 @@ Player::Player(){
 
 	AddCollider(new BoxCollider(Vector2(200.0f, 11.0f)), Vector2(0.0f, -6.0f));
 	AddCollider(new BoxCollider(Vector2(195.0f,12.0f)),Vector2(0.0f,6.0f));
+
+	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::PlatformLayer);
 }
 
 Player::~Player(){
@@ -60,6 +64,19 @@ void Player::HandleMovment() {
 	Pos(pos);
 }
 
+void Player::Hit(PhysEntity* other) {
+	Ball* ball = static_cast<Ball*>(other);
+	Vector2 dir = ball->Direction();
+	ball->Direction(Vector2(dir.x, -dir.y));
+}
+
+void Player::DroppedBall() {
+	//mLives--;
+	//mDeathAnimation->ResetAnimation();
+	//mAnimating = true;
+	//mAudio->PlaySFX("death.wav");
+}
+
 void Player::Visible(bool visible) {
 	mVisible = visible;
 }
@@ -79,12 +96,7 @@ void Player::AddScore(int change) {
 	mScore += change;
 }
 
-void Player::DroppedBall() {
-	mLives--;
-	mDeathAnimation->ResetAnimation();
-	mAnimating = true;
-	mAudio->PlaySFX("death.wav");
-}
+
 
 void Player::Update(){
 	if (mAnimating) {
