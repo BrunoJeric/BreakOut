@@ -43,8 +43,21 @@ namespace EngineSDL {
 	inline Vector2 operator -(const Vector2& left, const Vector2& right) {
 		return Vector2(left.x - right.x, left.y - right.y);
 	}
+
+
 	inline Vector2 operator *(const Vector2& left, const float& right) {
 		return Vector2(left.x * right, left.y * right);
+	}
+	inline Vector2 operator *(const float& left, const Vector2& right) {
+		return Vector2(left * right.x, left * right.y);
+	}
+
+
+	inline Vector2 operator /(const Vector2& left, const float& right) {
+		return Vector2(left.x / right, left.y / right);
+	}
+	inline Vector2 operator /(const float& left, const Vector2& right) {
+		return Vector2(left / right.x, left / right.y);
 	}
 
 

@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "BoxCollider.h"
 
 Player::Player(){
 	mTimer = Timer::Instance();
@@ -22,6 +23,9 @@ Player::Player(){
 	mDeathAnimation->Parent(this);
 	mDeathAnimation->Pos(VEC_ZERO);
 	mDeathAnimation->WrapMode(AnimatedTexture::once);
+
+	AddCollider(new BoxCollider(Vector2(200.0f, 11.0f)), Vector2(0.0f, -6.0f));
+	AddCollider(new BoxCollider(Vector2(195.0f,12.0f)),Vector2(0.0f,6.0f));
 }
 
 Player::~Player(){
@@ -102,6 +106,7 @@ void Player::Render() {
 		}
 		else {
 			mPlatform->Render();
+			PhysEntity::Render();
 
 		}
 

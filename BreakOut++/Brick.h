@@ -1,10 +1,11 @@
 #pragma once
 #include "Texture.h"
 #include "AudioManager.h"
+#include "PhysEntity.h"
 
 using namespace EngineSDL;
 
-class Brick : public GameEntity {
+class Brick : public PhysEntity {
 
 public:
 

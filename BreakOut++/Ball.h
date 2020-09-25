@@ -2,12 +2,12 @@
 #include "Texture.h"
 #include "InputManager.h"
 #include "Timer.h"
+#include "PhysEntity.h"
 using namespace EngineSDL;
-class Ball : public GameEntity {
+class Ball : public PhysEntity {
 
 private:
 	Timer* mTimer;
-	InputManager* mInput;
 
 	bool mDocked;
 	bool mVisible;

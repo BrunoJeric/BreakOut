@@ -2,10 +2,11 @@
 #include "AnimatedTexture.h"
 #include "InputManager.h"
 #include "AudioManager.h"
+#include "PhysEntity.h"
 
 using namespace EngineSDL;
 
-class Player : public GameEntity {
+class Player : public PhysEntity {
 
 private:
 

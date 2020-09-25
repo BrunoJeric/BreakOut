@@ -1,5 +1,5 @@
 #include "Ball.h"
-
+#include "CircleCollider.h"
 Ball::Ball() {
 	mTimer = Timer::Instance();
 	mDocked = false;
@@ -11,6 +11,8 @@ Ball::Ball() {
 	mBallTexture->Pos(VEC_ZERO);
 	mUDBounds = Vector2(25.0f, 620.0f);
 	mLRBounds = Vector2(181.0f, 843.0f);
+
+	AddCollider(new CircleCollider(25.0f));
 }
 
 Ball::~Ball() {
@@ -56,5 +58,6 @@ void Ball::Render() {
 	if (Active()) {
 
 		mBallTexture->Render();
+		PhysEntity::Render();
 	}
 }

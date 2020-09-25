@@ -1,5 +1,5 @@
 #include "Brick.h"
-
+#include "BoxCollider.h"
 Brick::Brick(char id,std::string hitSound, std::string breakSound, std::string texturePath, int hitPoints, int breakScore) {
 
 	mHitpoints = hitPoints;
@@ -11,6 +11,8 @@ Brick::Brick(char id,std::string hitSound, std::string breakSound, std::string t
 
 	mTexture = new Texture(texturePath);
 	mTexture->Parent(this);
+
+	AddCollider(new BoxCollider(mTexture->ScaledDimensions()));
 }
 
 Brick::~Brick() {
@@ -29,4 +31,5 @@ void Brick::Update() {
 }
 void Brick::Render() {
 	mTexture->Render();
+	PhysEntity::Render();
 }
