@@ -28,9 +28,43 @@ unsigned long PhysEntity::GetId() {
 
 bool PhysEntity::CheckCollision(PhysEntity* other) {
 	
-	return ColliderColliderCheck(mBroadPhaseCollider, other->mBroadPhaseCollider);
+	if (IgnoreCollision() || other->IgnoreCollision())
+		return false;
+
+	bool narrowPhaseCheck = false;
+
+	if (mBroadPhaseCollider && other->mBroadPhaseCollider) {
+		narrowPhaseCheck= ColliderColliderCheck(mBroadPhaseCollider, other->mBroadPhaseCollider);
+	}
+	else {
+		narrowPhaseCheck = true;
+	}
+
+	if (narrowPhaseCheck) {
+
+		for (int i = 0; i < mColliders.size(); i++) {
+
+			for (int j = 0; j < other->mColliders.size(); j++) {
+
+				if (ColliderColliderCheck(mColliders[i], other->mColliders[j])) {
+					return true;
+				}
+
+			}
+
+		}
+
+	}
+
+
+	return false;
 
 }
+
+bool PhysEntity::IgnoreCollision() {
+	return false;
+}
+
 
 void PhysEntity::Hit(PhysEntity* other) {
 

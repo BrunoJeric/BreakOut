@@ -48,6 +48,8 @@ Level::Level(int level, PlaySideBar* sideBar,Player* player,Ball* ball) {
 	mGameOverLabelOnScreen = 1.0f;
 
 	ParseXml();
+	Brick::CurrentPlayer(mPlayer);
+
 
 	mCurrentState = running;
 }
@@ -112,7 +114,7 @@ void Level::HandleStartLabels() {
 
 void Level::HandleCollisions() {
 	if (!mBallDropped) {
-		if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_X)) {
+		if (mBall->Speed()==0) {
 			mPlayer->DroppedBall();
 			mSideBar->SetLifes(mPlayer->Lives());
 
@@ -122,6 +124,15 @@ void Level::HandleCollisions() {
 			mBall->Active(false);
 		}
 	}
+}
+
+void Level::ResetBall() {
+	mBall->Parent(mPlayer);
+	mBall->Docked(true);
+	mBall->Pos(Vector2(0.0f, -25.0f));
+	mBall->Direction(Vector2(0.0f, -1.0f));
+	mBall->ResetSpeed();
+	mBall->Active(false);
 }
 
 void Level::HandlePlayerDeath() {
@@ -140,6 +151,7 @@ void Level::HandlePlayerDeath() {
 				mPlayer->Active(true);
 				mPlayer->Visible(true);
 
+				ResetBall();
 				mBall->Active(true);
 				mBall->Visible(true);
 
@@ -206,7 +218,7 @@ void Level::ParseXml() {
 				k++;
 				break;
 			}
-			else if (mBrickTypes[j]->Id() == tmp[i]) {
+			else if (mBrickTypes[j]->BrickId() == tmp[i]) {
 				mBricks.push_back(mBrickTypes[j]->Clone());
 				mBricks[total]->Parent(mBrickContainer);
 				if (k > mColumnCount-1) {
@@ -234,26 +246,28 @@ void Level::Update() {
 	}
 	else {
 		HandleCollisions();
-		GetBricksOnScreen();
+
 		if (mBallDropped) {
 
 			HandlePlayerDeath();
 
 		} else{
-			for (auto brick : mBricks)
+			bool q = true;
+			for (auto brick : mBricks) {
 				brick->Update();
+				if (brick->BrickId() != 'I') {
+					q = q & !brick->Visible();
+				}
+			}
+			if (q) {
+				mCurrentState = finished;
+			}
+
 			if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_SPACE)) {
 				mBall->Parent(this);
 				mBall->Docked(false);
 			}
-			if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_R)) {
-				mBall->RotateDirVec(45.0f);
-			}
-			if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_N)) {
-				mCurrentState = finished;
-			}
 		}
-		
 	}
 }
 

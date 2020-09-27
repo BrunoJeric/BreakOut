@@ -26,8 +26,7 @@ Player::Player(){
 	mDeathAnimation->Pos(VEC_ZERO);
 	mDeathAnimation->WrapMode(AnimatedTexture::once);
 
-	AddCollider(new BoxCollider(Vector2(200.0f, 11.0f)), Vector2(0.0f, -6.0f));
-	AddCollider(new BoxCollider(Vector2(195.0f,12.0f)),Vector2(0.0f,6.0f));
+	AddCollider(new BoxCollider(Vector2(200.0f, 23.0f)), VEC_ZERO);
 
 	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::PlatformLayer);
 }
@@ -42,6 +41,10 @@ Player::~Player(){
 
 	delete mDeathAnimation;
 	mDeathAnimation = NULL;
+}
+
+bool Player::IgnoreCollision() {
+	return !mVisible || mAnimating;
 }
 
 void Player::HandleMovment() {
@@ -65,16 +68,14 @@ void Player::HandleMovment() {
 }
 
 void Player::Hit(PhysEntity* other) {
-	Ball* ball = static_cast<Ball*>(other);
-	Vector2 dir = ball->Direction();
-	ball->Direction(Vector2(dir.x, -dir.y));
+
 }
 
 void Player::DroppedBall() {
-	//mLives--;
-	//mDeathAnimation->ResetAnimation();
-	//mAnimating = true;
-	//mAudio->PlaySFX("death.wav");
+	mLives--;
+	mDeathAnimation->ResetAnimation();
+	mAnimating = true;
+	mAudio->PlaySFX("death.wav");
 }
 
 void Player::Visible(bool visible) {

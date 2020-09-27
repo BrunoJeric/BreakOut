@@ -2,6 +2,7 @@
 #include "CircleCollider.h"
 #include "BoxCollider.h"
 #include "PhysicsManager.h"
+#include "Player.h"
 Ball::Ball() {
 	mTimer = Timer::Instance();
 	mDocked = false;
@@ -14,25 +15,47 @@ Ball::Ball() {
 	mUDBounds = Vector2(25.0f, 620.0f);
 	mLRBounds = Vector2(181.0f, 843.0f);
 
-	//AddCollider(new CircleCollider(25.0f));
-	AddCollider(new BoxCollider(mBallTexture->ScaledDimensions()));
-
+	AddCollider(new CircleCollider(25.0f));
 	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::BallLayer);
 
 }
-
 Ball::~Ball() {
 	mTimer = NULL;
 
 	delete mBallTexture;
 	mBallTexture = NULL;
 }
+
+bool Ball::IgnoreCollision() {
+	return mDocked;
+}
+
 void Ball::Visible(bool visible) {
 	mVisible = visible;
 }
 
+void Ball::ResetSpeed() {
+	mSpeed = 700.0f;
+}
+
 void Ball::Hit(PhysEntity* other) {
-	mDirection=Vector2(mDirection.x, -mDirection.y);
+
+	Player* pl = dynamic_cast<Player*>(other);
+	
+	if (pl != NULL) {
+		if (InputManager::Instance()->KeyDown(SDL_SCANCODE_RIGHT)) {
+			RotateDirVec(-10.0f);
+		}else if (InputManager::Instance()->KeyDown(SDL_SCANCODE_LEFT)) {
+			RotateDirVec(10.0f);
+		}
+	}
+	mDirection = Vector2(mDirection.x, -mDirection.y);
+
+	
+}
+
+float Ball::Speed() {
+	return mSpeed;
 }
 
 void Ball::Docked(bool docked) {
@@ -50,11 +73,14 @@ void Ball::RotateDirVec(float  amount) {
 
 void Ball::TranslateAndHandlePlayArea() {
 
-	if (Pos().y < mUDBounds.x || Pos().y > mUDBounds.y) {
+	if (Pos().y < mUDBounds.x) {
 		mDirection = Vector2(mDirection.x, -mDirection.y);
 	}
 	else if (Pos().x < mLRBounds.x || Pos().x > mLRBounds.y) {
 		mDirection = Vector2(-mDirection.x, mDirection.y);
+	}
+	else if (Pos().y > mUDBounds.y) {
+		mSpeed = 0.0f;
 	}
 	Translate(mDirection * mSpeed * mTimer->DeltaTime(), local);
 }

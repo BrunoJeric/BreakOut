@@ -39,7 +39,7 @@ namespace EngineSDL {
 		mPhysicsManager = PhysicsManager::Instance();
 
 		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::PlatformLayer, PhysicsManager::CollisonFlags::BallLayer);
-		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::BallLayer, PhysicsManager::CollisonFlags::PlatformLayer| PhysicsManager::CollisonFlags::BrickLayer);
+		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::BallLayer, PhysicsManager::CollisonFlags::PlatformLayer |PhysicsManager::CollisonFlags::BrickLayer);
 		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::BrickLayer, PhysicsManager::CollisonFlags::BallLayer); 
 
 

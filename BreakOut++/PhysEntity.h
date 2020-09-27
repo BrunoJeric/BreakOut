@@ -27,6 +27,8 @@ public:
 protected:
 	void AddCollider(Collider* collider, Vector2 localPos = VEC_ZERO);
 
+	virtual bool IgnoreCollision();
+
 
 
 };

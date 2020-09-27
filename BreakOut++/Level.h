@@ -67,6 +67,7 @@ private:
 	void HandleCollisions();
 	void HandlePlayerDeath();
 	void GetBricksOnScreen();
+	void ResetBall();
 	void ParseXml();
 
 public:

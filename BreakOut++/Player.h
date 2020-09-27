@@ -28,6 +28,7 @@ private:
 
 private:
 	void HandleMovment();
+	bool IgnoreCollision();
 
 public:
 	Player();

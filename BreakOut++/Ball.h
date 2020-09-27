@@ -22,6 +22,7 @@ private:
 	Texture* mBallTexture;
 private:
 	void TranslateAndHandlePlayArea();
+	bool IgnoreCollision() override;
 public:
 	Ball();
 	~Ball();
@@ -31,6 +32,9 @@ public:
 
 	void Visible(bool visible);
 	bool Visible();
+
+	void ResetSpeed();
+	float Speed();
 
 	void Hit(PhysEntity* other) override;
 

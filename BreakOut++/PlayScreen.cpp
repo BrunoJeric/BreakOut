@@ -77,10 +77,19 @@ void PlayScreen::StartNextLevel() {
 	mCurrentLevel++;
 	mLevelStartTimer = 0.0f;
 	mLevelStarted = true;
+
 	
 
 	delete mLevel;
 	
+	delete mBall;
+	mBall = new Ball();
+	mBall->Scale(Vector2(0.5f, 0.5f));
+	mBall->Parent(mPlayer);
+	mBall->Docked(true);
+	mBall->Pos(Vector2(0.0f, -25.0f));
+	mBall->Active(false);
+
 	mLevel = new Level(mCurrentLevel, mSideBar,mPlayer,mBall);
 	//maybe remove sound 
 	mAudioManager->PlaySFX("levelReady.wav");
@@ -127,6 +136,7 @@ void PlayScreen::Update(){
 			}
 		}
 		mPlayer->Update();
+		mSideBar->SetPlayerScore(mPlayer->Score());
 		mBall->Update();
 
 	}
