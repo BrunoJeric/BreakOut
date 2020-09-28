@@ -18,7 +18,7 @@ namespace EngineSDL {
 
 	public:
 
-		GameEntity(float x = 0.0f, float y = 0.0f);
+		GameEntity(Vector2 pos = VEC_ZERO);
 		~GameEntity();
 
 		void Pos(Vector2 pos);
@@ -36,7 +36,7 @@ namespace EngineSDL {
 		void Parent(GameEntity* parent);
 		GameEntity* Parent();
 
-		void Translate(Vector2 vec);
+		void Translate(Vector2 vec,SPACE space=local);
 		void Rotate(float amount);
 
 		virtual void Update();

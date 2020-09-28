@@ -1,6 +1,8 @@
 #pragma once
 #include "Graphics.h"
 #include "SDL_mixer.h"
+#include "tinyxml2.h"
+using namespace tinyxml2;
 #include <map>
 namespace EngineSDL {
 	class AssetManager {
@@ -24,6 +26,7 @@ namespace EngineSDL {
 
 		Mix_Music* GetMusic(std::string filename);
 		Mix_Chunk* GetSFX(std::string filename);
+
 
 	private:
 		AssetManager();

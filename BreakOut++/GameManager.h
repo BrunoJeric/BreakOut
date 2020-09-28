@@ -1,28 +1,28 @@
 #pragma once
-#include "Texture.h"
 #include "Timer.h"
-#include "InputManager.h"
 #include "AudioManager.h"
+#include "ScreenManager.h"
+#include "PhysicsManager.h"
 namespace EngineSDL {
 	class GameManager {
 	private:
 		static GameManager* sInstance;
 
-		const int FRAME_RATE = 120;
+		const int FRAME_RATE = 60;
 
 		bool mQuit;
 
-		//list of managers
 		Graphics* mGraphics;
 		AssetManager* mAssetManager;
 		InputManager* mInputManager;
 		AudioManager* mAudioManager;
+		PhysicsManager* mPhysicsManager;
 
 
 		Timer* mTimer;
-		//catch exit event
 		SDL_Event mEvents;
 
+		ScreenManager* mScreenManager;
 
 	public:
 		static GameManager* Instance();

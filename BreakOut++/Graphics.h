@@ -8,14 +8,13 @@
 namespace EngineSDL {
 	class Graphics {
 	public:
-		static const int SCREEN_WIDTH = 800;
-		static const int SCREEN_HEIGHT = 600;
+		static const int SCREEN_WIDTH = 860;
+		static const int SCREEN_HEIGHT = 645;
 	private:
 		static Graphics* sInstance;
 		static bool sInitialized;
 
 		SDL_Window* mWindow;
-		SDL_Surface* mBackBuffer;
 
 		SDL_Renderer* mRenderer;
 	public:
@@ -28,7 +27,7 @@ namespace EngineSDL {
 
 		void ClearBackBuffer();
 
-		void DrawTexture(SDL_Texture* tex, SDL_Rect* clip = NULL, SDL_Rect* rend = NULL, float angle = 0.0f, SDL_RendererFlip flip = SDL_FLIP_NONE);
+		void DrawTexture(SDL_Texture* tex, SDL_Rect* clip = nullptr, SDL_Rect* rend = nullptr, float angle = 0.0f, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 		void Render();
 	private:

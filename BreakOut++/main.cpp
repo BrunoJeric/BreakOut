@@ -4,7 +4,7 @@ int main(int argc, char* argv[]) {
 	EngineSDL::GameManager* game = EngineSDL::GameManager::Instance();
 	game->Run();
 	EngineSDL::GameManager::Release();
-	game = NULL;
+	game = nullptr;
 	return 0;
 
 }

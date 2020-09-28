@@ -30,7 +30,12 @@ namespace EngineSDL {
 	public:
 		AnimatedTexture(std::string fileName, int x, int y, int w, int h, int frameCount, float animationSpeed, ANIM_DIR animationDir);
 		~AnimatedTexture();
+		
 		void WrapMode(WRAP_MODE mode);
+
+		void ResetAnimation();
+		bool IsAnimating();
+
 		void Update();
 
 	};

@@ -1,10 +1,10 @@
 #include "Timer.h"
 namespace EngineSDL {
-	Timer* Timer::sInstance = NULL;
+	Timer* Timer::sInstance = nullptr;
 
 	Timer* Timer::Instance() {
 
-		if (sInstance == NULL)
+		if (sInstance == nullptr)
 			sInstance = new Timer();
 
 		return sInstance;
@@ -13,7 +13,7 @@ namespace EngineSDL {
 	void Timer::Release() {
 
 		delete sInstance;
-		sInstance = NULL;
+		sInstance = nullptr;
 	}
 
 	Timer::Timer() {

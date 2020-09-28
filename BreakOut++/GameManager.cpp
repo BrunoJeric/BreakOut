@@ -1,9 +1,9 @@
 #include "GameManager.h"
 namespace EngineSDL {
-	GameManager* GameManager::sInstance = NULL;
+	GameManager* GameManager::sInstance = nullptr;
 
 	GameManager* GameManager::Instance() {
-		if (sInstance == NULL) {
+		if (sInstance == nullptr) {
 			sInstance = new GameManager();
 		}
 		return sInstance;
@@ -11,7 +11,7 @@ namespace EngineSDL {
 
 	void GameManager::Release() {
 		delete sInstance;
-		sInstance = NULL;
+		sInstance = nullptr;
 	}
 
 	GameManager::GameManager() {
@@ -35,25 +35,41 @@ namespace EngineSDL {
 
 		//Initialize Timer
 		mTimer = Timer::Instance();
+
+		mPhysicsManager = PhysicsManager::Instance();
+
+		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::PlatformLayer, PhysicsManager::CollisonFlags::BallLayer);
+		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::BallLayer, PhysicsManager::CollisonFlags::PlatformLayer |PhysicsManager::CollisonFlags::BrickLayer);
+		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::BrickLayer, PhysicsManager::CollisonFlags::BallLayer); 
+
+
+
+		mScreenManager = ScreenManager::Instance();
+
 	}
 
 	GameManager::~GameManager() {
 
+		ScreenManager::Release();
+		mScreenManager = nullptr;
+
+		PhysicsManager::Release();
+		mPhysicsManager = nullptr;
+
 		AudioManager::Release();
-		mAudioManager = NULL;
+		mAudioManager = nullptr;
 
 		AssetManager::Release();
-		mAssetManager = NULL;
+		mAssetManager = nullptr;
 
 		Graphics::Release();
-		mGraphics = NULL;
+		mGraphics = nullptr;
 
 		InputManager::Release();
-		mInputManager = NULL;
+		mInputManager = nullptr;
 
 		Timer::Release();
-		mTimer = NULL;
-
+		mTimer = nullptr;
 
 
 
@@ -61,18 +77,21 @@ namespace EngineSDL {
 
 	void GameManager::EarlyUpdate() {
 
-		mTimer->Reset();
 		mInputManager->Update();
+		mTimer->Reset();
 
 
 	}
 
 	void GameManager::Update() {
+		//Game objects update here
+		mScreenManager->Update();
 
 	}
 
 	void GameManager::LateUpdate() {
 
+		mPhysicsManager->Update();
 		mInputManager->UpdatePreviousInput();
 	}
 
@@ -81,6 +100,7 @@ namespace EngineSDL {
 		mGraphics->ClearBackBuffer();
 
 		//all rendering here
+		mScreenManager->Render();
 
 		mGraphics->Render();
 	}

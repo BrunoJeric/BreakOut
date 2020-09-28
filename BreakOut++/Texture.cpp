@@ -4,7 +4,7 @@ namespace EngineSDL {
 		mGraphics = Graphics::Instance();
 		mTex = AssetManager::Instance()->GetTexture(fileName);
 
-		SDL_QueryTexture(mTex, NULL, NULL, &mWidth, &mHeight);
+		SDL_QueryTexture(mTex, nullptr, nullptr, &mWidth, &mHeight);
 
 		mClipped = false;
 
@@ -37,7 +37,7 @@ namespace EngineSDL {
 
 		mClipped = false;
 
-		SDL_QueryTexture(mTex, NULL, NULL, &mWidth, &mHeight);
+		SDL_QueryTexture(mTex, nullptr, nullptr, &mWidth, &mHeight);
 
 		mRenderRect.w = mWidth;
 		mRenderRect.h = mHeight;
@@ -46,19 +46,34 @@ namespace EngineSDL {
 	}
 
 	Texture::~Texture() {
-		mTex = NULL;
-		mGraphics = NULL;
+		mTex = nullptr;
+		mGraphics = nullptr;
 	}
 
+
+	Vector2 Texture::ScaledDimensions() {
+
+		Vector2 scaledDimensions = Scale();
+		scaledDimensions.x *= mWidth;
+		scaledDimensions.y *= mHeight;
+
+		return scaledDimensions;
+	}
+
+
 	void Texture::Render() {
+
 		Vector2 pos = Pos(world);
 		Vector2 scale = Scale(world);
 
+		//Centers the texture on the texture's world position so that its position is not the top left corner
 		mRenderRect.x = (int)(pos.x - mWidth * scale.x * 0.5f);
 		mRenderRect.y = (int)(pos.y - mHeight * scale.y * 0.5f);
 
+		//Scales the width and height according to the scale of the GameEntity
 		mRenderRect.w = (int)(mWidth * scale.x);
 		mRenderRect.h = (int)(mHeight * scale.y);
-		mGraphics->DrawTexture(mTex, (mClipped) ? &mClipRect : NULL, &mRenderRect, Rotation(world));
+
+		mGraphics->DrawTexture(mTex, (mClipped) ? &mClipRect : nullptr, &mRenderRect, Rotation(world));
 	}
 }

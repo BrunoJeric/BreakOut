@@ -32,6 +32,10 @@ namespace EngineSDL {
 			return *this;
 		}
 
+		Vector2 operator -() const {
+			return Vector2(-x, -y);
+		}
+
 	};
 	inline Vector2 operator +(const Vector2& left, const Vector2& right) {
 		return Vector2(left.x + right.x, left.y + right.y);
@@ -39,15 +43,55 @@ namespace EngineSDL {
 	inline Vector2 operator -(const Vector2& left, const Vector2& right) {
 		return Vector2(left.x - right.x, left.y - right.y);
 	}
+
+
 	inline Vector2 operator *(const Vector2& left, const float& right) {
 		return Vector2(left.x * right, left.y * right);
 	}
+	inline Vector2 operator *(const float& left, const Vector2& right) {
+		return Vector2(left * right.x, left * right.y);
+	}
 
 
-	inline Vector2 RotateVector(Vector2& vec, float angle) {
+	inline Vector2 operator /(const Vector2& left, const float& right) {
+		return Vector2(left.x / right, left.y / right);
+	}
+	inline Vector2 operator /(const float& left, const Vector2& right) {
+		return Vector2(left / right.x, left / right.y);
+	}
+
+
+	inline Vector2 RotateVector(const Vector2& vec, float angle) {
 		float radAngle = (float)(angle * DEG_TO_RAD);
 
 		return Vector2((float)(vec.x * cos(radAngle) - vec.y * sin(radAngle)), (float)(vec.x * sin(radAngle) + vec.y * cos(radAngle)));
+	}
+	
+	inline float Dot(const Vector2& vec1, const Vector2& vec2) {
+		return vec1.x * vec2.x + vec1.y * vec2.y;
+	}
+
+	inline float Clamp(const float& val, const float& min, const float& max) {
+		if (val > max)
+			return max;
+		if (val < min)
+			return min;
+
+		return val;
+	}
+
+
+	inline Vector2 Lerp(Vector2& start, Vector2& end, float time) {
+		if (time <= 0.0f)
+			return start;
+
+		if (time >= 1.0f)
+			return end;
+
+		Vector2 dir = (end - start).Normalized();
+		float mag = (end - start).Magnitude();
+
+		return start + dir * mag * time;
 	}
 
 	const Vector2 VEC_ZERO = { 0.0f, 0.0f };

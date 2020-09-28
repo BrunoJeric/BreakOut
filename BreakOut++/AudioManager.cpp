@@ -1,7 +1,7 @@
 #include "AudioManager.h"
 namespace EngineSDL {
 
-	AudioManager* AudioManager::sInstance = NULL;
+	AudioManager* AudioManager::sInstance = nullptr;
 
 	AudioManager* AudioManager::Instance() {
 
@@ -13,7 +13,7 @@ namespace EngineSDL {
 
 	void AudioManager::Release() {
 		delete sInstance;
-		sInstance = NULL;
+		sInstance = nullptr;
 	}
 
 	AudioManager::AudioManager() {
@@ -27,7 +27,7 @@ namespace EngineSDL {
 	}
 
 	AudioManager::~AudioManager() {
-		mAssetManager = NULL;
+		mAssetManager = nullptr;
 		Mix_Quit();
 	}
 
