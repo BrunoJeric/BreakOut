@@ -228,7 +228,6 @@ void Level::ParseXml() {
 
 
 		std::string tmp = cdoc.FirstChildElement("Level")->FirstChildElement("Bricks")->GetText();
-		std::cout << tmp << std::endl;
 		mBrickContainer = new GameEntity();
 		mBrickContainer->Parent(this);
 		mBrickContainer->Pos(Vector2(545.0f - (mColumnCount * 50.0f + mColumnCount * mColumnSpacing) / 2.0f, Graphics::Instance()->SCREEN_HEIGHT * 0.1f));

@@ -52,18 +52,11 @@ namespace EngineSDL {
 		}
 		mSFX.clear();
 
-		/*for (auto level : mLevels) {
-			if (level.second != nullptr) {
-				delete level.second;
-				level.second = nullptr;
-			}
-		}
-		mLevels.clear();*/
 	}
 
 	SDL_Texture* AssetManager::GetTexture(std::string filename) {
 		std::string fullPath = SDL_GetBasePath();
-		fullPath.append("Assets/" + filename);
+		fullPath.append("Assets/Textures/" + filename);
 
 		if (mTextures[fullPath] == nullptr) {
 			mTextures[fullPath] = Graphics::Instance()->LoadTexture(fullPath);
@@ -74,7 +67,7 @@ namespace EngineSDL {
 
 	TTF_Font* AssetManager::GetFont(std::string filename, int size) {
 		std::string fullPath = SDL_GetBasePath();
-		fullPath.append("Assets/" + filename);
+		fullPath.append("Assets/Fonts/" + filename);
 
 		std::string key = fullPath + (char)size;
 
