@@ -56,7 +56,7 @@ void PlayScreen::StartNewGame() {
 	mBall->Scale(Vector2(0.4f, 0.4f));
 	mBall->Parent(mPlayer);
 	mBall->Docked(true);
-	mBall->Pos(Vector2(0.0f,-20.0f));
+	mBall->Pos(Vector2(0.0f,-25.0f));
 	mBall->Active(false);
 
 	mSideBar->SetHighScore(30000);
@@ -87,7 +87,7 @@ void PlayScreen::StartNextLevel() {
 	mBall->Scale(Vector2(0.4f, 0.4f));
 	mBall->Parent(mPlayer);
 	mBall->Docked(true);
-	mBall->Pos(Vector2(0.0f, -20.0f));
+	mBall->Pos(Vector2(0.0f, -25.0f));
 	mBall->Active(false);
 
 	mLevel = new Level(mCurrentLevel, mSideBar,mPlayer,mBall);
