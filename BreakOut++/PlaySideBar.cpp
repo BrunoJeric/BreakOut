@@ -62,43 +62,43 @@ PlaySideBar::PlaySideBar() {
 }
 
 PlaySideBar::~PlaySideBar() {
-	mTimer = NULL;
-	mAudioManager = NULL;
+	mTimer = nullptr;
+	mAudioManager = nullptr;
 
 	delete mBackground;
-	mBackground = NULL;
+	mBackground = nullptr;
 
 	delete mHighLabel;
-	mHighLabel = NULL;
+	mHighLabel = nullptr;
 
 	delete mScoreLabel;
-	mScoreLabel = NULL;
+	mScoreLabel = nullptr;
 
 	delete mHighScoreboard;
-	mHighScoreboard = NULL;
+	mHighScoreboard = nullptr;
 
 	delete mPlayerOneLabel;
-	mPlayerOneLabel = NULL;
+	mPlayerOneLabel = nullptr;
 
 	delete mPlayerScoreboard;
-	mPlayerScoreboard = NULL;
+	mPlayerScoreboard = nullptr;
 
 	delete mLifes;
-	mLifes = NULL;
+	mLifes = nullptr;
 
 	for (int i = 0; i < MAX_LIFES; i++) {
 		delete mLifesTextures[i];
-		mLifesTextures[i] = NULL;
+		mLifesTextures[i] = nullptr;
 	}
 
 	delete mLevel;
-	mLevel = NULL;
+	mLevel = nullptr;
 
 	delete mLevelLabel;
-	mLevelLabel = NULL;
+	mLevelLabel = nullptr;
 
 	delete mLevelNumber;
-	mLevelNumber = NULL;
+	mLevelNumber = nullptr;
 }
 
 void PlaySideBar::SetHighScore(int score) {

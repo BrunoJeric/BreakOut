@@ -12,7 +12,6 @@ namespace EngineSDL {
 
 		bool mQuit;
 
-		//list of managers
 		Graphics* mGraphics;
 		AssetManager* mAssetManager;
 		InputManager* mInputManager;
@@ -21,7 +20,6 @@ namespace EngineSDL {
 
 
 		Timer* mTimer;
-		//catch exit event
 		SDL_Event mEvents;
 
 		ScreenManager* mScreenManager;

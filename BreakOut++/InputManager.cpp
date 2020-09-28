@@ -1,9 +1,9 @@
 #include "InputManager.h"
 namespace EngineSDL {
-	InputManager* InputManager::sInstance = NULL;
+	InputManager* InputManager::sInstance = nullptr;
 
 	InputManager* InputManager::Instance() {
-		if (sInstance == NULL) {
+		if (sInstance == nullptr) {
 			sInstance = new InputManager();
 		}
 		return sInstance;
@@ -11,7 +11,7 @@ namespace EngineSDL {
 
 	void InputManager::Release() {
 		delete sInstance;
-		sInstance = NULL;
+		sInstance = nullptr;
 	}
 
 	InputManager::InputManager() {
@@ -22,7 +22,7 @@ namespace EngineSDL {
 
 	InputManager::~InputManager() {
 		delete[] mPrevKeyboardState;
-		mPrevKeyboardState = NULL;
+		mPrevKeyboardState = nullptr;
 	}
 
 	bool InputManager::KeyDown(SDL_Scancode scanCode) {

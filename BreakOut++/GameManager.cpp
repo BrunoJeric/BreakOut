@@ -1,9 +1,9 @@
 #include "GameManager.h"
 namespace EngineSDL {
-	GameManager* GameManager::sInstance = NULL;
+	GameManager* GameManager::sInstance = nullptr;
 
 	GameManager* GameManager::Instance() {
-		if (sInstance == NULL) {
+		if (sInstance == nullptr) {
 			sInstance = new GameManager();
 		}
 		return sInstance;
@@ -11,7 +11,7 @@ namespace EngineSDL {
 
 	void GameManager::Release() {
 		delete sInstance;
-		sInstance = NULL;
+		sInstance = nullptr;
 	}
 
 	GameManager::GameManager() {
@@ -51,25 +51,25 @@ namespace EngineSDL {
 	GameManager::~GameManager() {
 
 		ScreenManager::Release();
-		mScreenManager = NULL;
+		mScreenManager = nullptr;
 
 		PhysicsManager::Release();
-		mPhysicsManager = NULL;
+		mPhysicsManager = nullptr;
 
 		AudioManager::Release();
-		mAudioManager = NULL;
+		mAudioManager = nullptr;
 
 		AssetManager::Release();
-		mAssetManager = NULL;
+		mAssetManager = nullptr;
 
 		Graphics::Release();
-		mGraphics = NULL;
+		mGraphics = nullptr;
 
 		InputManager::Release();
-		mInputManager = NULL;
+		mInputManager = nullptr;
 
 		Timer::Release();
-		mTimer = NULL;
+		mTimer = nullptr;
 
 
 

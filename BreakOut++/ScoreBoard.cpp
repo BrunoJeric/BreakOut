@@ -14,7 +14,7 @@ ScoreBoard::~ScoreBoard() {
 void ScoreBoard::ClearBoard() {
 	for (int i = 0; i < mScore.size(); i++) {
 		delete mScore[i];
-		mScore[i] = NULL;
+		mScore[i] = nullptr;
 	}
 	mScore.clear();
 }

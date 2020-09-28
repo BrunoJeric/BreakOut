@@ -11,18 +11,15 @@ private:
 	Timer* mTimer;
 	InputManager* mInputManager;
 
-	//Top bar
 	GameEntity* mTopBar;
 	Texture* mPlayerOne;
 	Texture* mHighScore;
 	ScoreBoard* mPlayerOneScore;
 	ScoreBoard* mTopScore;
 
-	//Logo
 	Texture* mLogo;
 	AnimatedTexture* mAnimatedLogo;
 
-	//Start game
 	GameEntity* mPlay;
 	Texture* mStartGame;
 	Texture* mQuitGame;
@@ -32,12 +29,10 @@ private:
 	int mSelection;
 
 
-	//Bottom bar
 	GameEntity* mBottomBar;
 	Texture* mDate;
 	Texture* mCreds;
 
-	//Screen animation
 	Vector2 mAnimationStartPosition;
 	Vector2 mAnimationEndPosition;
 	float mAnimationTotalTime;

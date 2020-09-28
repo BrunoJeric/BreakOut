@@ -71,8 +71,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\Windows\BrunoJeric\dev\SDL2\include;D:\Windows\BrunoJeric\dev\SDL2_image-2.0.5\include;D:\Windows\BrunoJeric\dev\SDL2_ttf-2.0.15\include;D:\Windows\BrunoJeric\dev\SDL2_mixer-2.0.4\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Windows\BrunoJeric\dev\SDL2\lib\x86;D:\Windows\BrunoJeric\dev\SDL2_image-2.0.5\lib\x86;D:\Windows\BrunoJeric\dev\SDL2_ttf-2.0.15\lib\x86;D:\Windows\BrunoJeric\dev\SDL2_mixer-2.0.4\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)SDL2\include;$(SolutionDir)SDL2_image-2.0.5\include;$(SolutionDir)SDL2_ttf-2.0.15\include;$(SolutionDir)SDL2_mixer-2.0.4\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)SDL2\lib\x86;$(SolutionDir)SDL2_image-2.0.5\lib\x86;$(SolutionDir)SDL2_ttf-2.0.15\lib\x86;$(SolutionDir)SDL2_mixer-2.0.4\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -89,13 +89,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Windows\BrunoJeric\dev\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Windows\BrunoJeric\dev\SDL2\lib\x86;D:\Windows\BrunoJeric\dev\SDL2_image-2.0.5\lib\x86;D:\Windows\BrunoJeric\dev\SDL2_ttf-2.0.15\lib\x86;D:\Windows\BrunoJeric\dev\SDL2_mixer-2.0.4\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)SDL2\lib\x86;$(SolutionDir)SDL2_image-2.0.5\lib\x86;$(SolutionDir)SDL2_ttf-2.0.15\lib\x86;$(SolutionDir)SDL2_mixer-2.0.4\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

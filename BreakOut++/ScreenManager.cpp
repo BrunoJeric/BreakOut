@@ -1,16 +1,16 @@
 #include "ScreenManager.h"
 
-ScreenManager* ScreenManager::sInstance = NULL;
+ScreenManager* ScreenManager::sInstance = nullptr;
 
 ScreenManager* ScreenManager::Instance() {
-	if (sInstance == NULL)
+	if (sInstance == nullptr)
 		sInstance = new ScreenManager();
 	return sInstance;
 }
 
 void ScreenManager::Release() {
 	delete sInstance;
-	sInstance = NULL;
+	sInstance = nullptr;
 }
 
 ScreenManager::ScreenManager() {
@@ -24,13 +24,13 @@ ScreenManager::ScreenManager() {
 }
 
 ScreenManager::~ScreenManager() {
-	mInputManager = NULL;
+	mInputManager = nullptr;
 
 	delete mStartScreen;
-	mStartScreen = NULL;
+	mStartScreen = nullptr;
 
 	delete mPlayScreen;
-	mPlayScreen = NULL;
+	mPlayScreen = nullptr;
 }
 
 void ScreenManager::Update() {
@@ -39,10 +39,17 @@ void ScreenManager::Update() {
 	case start:
 		mStartScreen->Update();
 		if (mInputManager->KeyPressed(SDL_SCANCODE_RETURN)) {
-			
-			mCurrentScreen = play;
-			mStartScreen->ResetAnimation();
-			mPlayScreen->StartNewGame();
+			if (mStartScreen->SelectedScreen() == 0) {
+
+				mCurrentScreen = play;
+				mStartScreen->ResetAnimation();
+				mPlayScreen->StartNewGame();
+
+			}
+			else {
+				SDL_Quit();
+				exit(0);
+			}
 
 		}
 		break;

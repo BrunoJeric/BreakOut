@@ -20,10 +20,10 @@ Ball::Ball() {
 
 }
 Ball::~Ball() {
-	mTimer = NULL;
+	mTimer = nullptr;
 
 	delete mBallTexture;
-	mBallTexture = NULL;
+	mBallTexture = nullptr;
 }
 
 bool Ball::IgnoreCollision() {
@@ -42,7 +42,7 @@ void Ball::Hit(PhysEntity* other) {
 
 	Player* pl = dynamic_cast<Player*>(other);
 	
-	if (pl != NULL) {
+	if (pl != nullptr) {
 		if (InputManager::Instance()->KeyDown(SDL_SCANCODE_RIGHT)) {
 			RotateDirVec(-10.0f);
 		}else if (InputManager::Instance()->KeyDown(SDL_SCANCODE_LEFT)) {
@@ -75,14 +75,19 @@ void Ball::TranslateAndHandlePlayArea() {
 
 	if (Pos().y < mUDBounds.x) {
 		mDirection = Vector2(mDirection.x, -mDirection.y);
+		AudioManager::Instance()->PlaySFX("platform.wav");
+
 	}
 	else if (Pos().x < mLRBounds.x || Pos().x > mLRBounds.y) {
 		mDirection = Vector2(-mDirection.x, mDirection.y);
+		AudioManager::Instance()->PlaySFX("platform.wav");
+
 	}
 	else if (Pos().y > mUDBounds.y) {
 		mSpeed = 0.0f;
 	}
 	Translate(mDirection * mSpeed * mTimer->DeltaTime(), local);
+
 }
 
 void Ball::Direction(Vector2 dir) {

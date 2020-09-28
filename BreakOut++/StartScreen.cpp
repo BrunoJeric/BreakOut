@@ -77,39 +77,39 @@ StartScreen::StartScreen() {
 StartScreen::~StartScreen() {
 	//top bar cleanup
 	delete mTopBar;
-	mTopBar = NULL;
+	mTopBar = nullptr;
 	delete mPlayerOne;
-	mPlayerOne= NULL;
+	mPlayerOne= nullptr;
 	delete mHighScore;
-	mHighScore = NULL;
+	mHighScore = nullptr;
 	delete mTopScore;
-	mTopScore = NULL;
+	mTopScore = nullptr;
 	delete mPlayerOneScore;
-	mPlayerOneScore = NULL;
+	mPlayerOneScore = nullptr;
 
 	//logo cleanup
 	delete mLogo;
-	mLogo = NULL;
+	mLogo = nullptr;
 	delete mAnimatedLogo;
-	mAnimatedLogo = NULL;
+	mAnimatedLogo = nullptr;
 	
 	//game start cleanup
 	delete mPlay;
-	mPlay = NULL;
+	mPlay = nullptr;
 	delete mStartGame;
-	mStartGame = NULL;
+	mStartGame = nullptr;
 	delete mQuitGame;
-	mQuitGame = NULL;
+	mQuitGame = nullptr;
 	delete mCursor;
-	mCursor = NULL;
+	mCursor = nullptr;
 
 	//bottom bar cleanup
 	delete mBottomBar;
-	mBottomBar = NULL;
+	mBottomBar = nullptr;
 	delete mDate;
-	mDate = NULL;
+	mDate = nullptr;
 	delete mCreds;
-	mCreds = NULL;
+	mCreds = nullptr;
 }
 
 void StartScreen::ChangeSelection(int change) {

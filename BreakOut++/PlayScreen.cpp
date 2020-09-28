@@ -13,34 +13,34 @@ PlayScreen::PlayScreen() {
 	mStartLabel->Parent(this);
 	mStartLabel->Pos(Vector2(Graphics::Instance()->SCREEN_WIDTH * 0.6f, Graphics::Instance()->SCREEN_HEIGHT * 0.5f));
 
-	mLevel = NULL;
+	mLevel = nullptr;
 	mLevelStartTimer = 0.0f;
 	mLevelStartDelay = 1.0f;
 	mLevelStarted = false;
 
-	mPlayer = NULL;
-	mBall = NULL;
+	mPlayer = nullptr;
+	mBall = nullptr;
 }
 
 PlayScreen::~PlayScreen() {
-	mTimer = NULL;
-	mInputManager = NULL;
-	mAudioManager = NULL;
+	mTimer = nullptr;
+	mInputManager = nullptr;
+	mAudioManager = nullptr;
 
 	delete mSideBar;
-	mSideBar = NULL;
+	mSideBar = nullptr;
 
 	delete mStartLabel;
-	mStartLabel = NULL;
+	mStartLabel = nullptr;
 
 	delete mLevel;
-	mLevel = NULL;
+	mLevel = nullptr;
 
 	delete mPlayer;
-	mPlayer = NULL;
+	mPlayer = nullptr;
 
 	delete mBall;
-	mBall = NULL;
+	mBall = nullptr;
 }
 
 void PlayScreen::StartNewGame() {
@@ -53,10 +53,10 @@ void PlayScreen::StartNewGame() {
 
 	delete mBall;
 	mBall = new Ball();
-	mBall->Scale(Vector2(0.5f, 0.5f));
+	mBall->Scale(Vector2(0.4f, 0.4f));
 	mBall->Parent(mPlayer);
 	mBall->Docked(true);
-	mBall->Pos(Vector2(0.0f,-25.0f));
+	mBall->Pos(Vector2(0.0f,-20.0f));
 	mBall->Active(false);
 
 	mSideBar->SetHighScore(30000);
@@ -84,14 +84,13 @@ void PlayScreen::StartNextLevel() {
 	
 	delete mBall;
 	mBall = new Ball();
-	mBall->Scale(Vector2(0.5f, 0.5f));
+	mBall->Scale(Vector2(0.4f, 0.4f));
 	mBall->Parent(mPlayer);
 	mBall->Docked(true);
-	mBall->Pos(Vector2(0.0f, -25.0f));
+	mBall->Pos(Vector2(0.0f, -20.0f));
 	mBall->Active(false);
 
 	mLevel = new Level(mCurrentLevel, mSideBar,mPlayer,mBall);
-	//maybe remove sound 
 	mAudioManager->PlaySFX("levelReady.wav");
 
 }

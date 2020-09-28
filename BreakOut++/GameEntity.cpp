@@ -5,12 +5,12 @@ namespace EngineSDL {
 		mPos = pos;
 		mRotation = 0.0f;
 		mActive = true;
-		mParent = NULL;
+		mParent = nullptr;
 		mScale = VEC_ONE;
 	}
 
 	GameEntity::~GameEntity() {
-		mParent = NULL;
+		mParent = nullptr;
 	}
 
 	void GameEntity::Pos(Vector2 pos) {
@@ -19,7 +19,7 @@ namespace EngineSDL {
 
 	Vector2 GameEntity::Pos(SPACE space) {
 
-		if (space == local || mParent == NULL)
+		if (space == local || mParent == nullptr)
 			return mPos;
 
 		Vector2 parentScale = mParent->Scale(world);
@@ -46,7 +46,7 @@ namespace EngineSDL {
 	}
 
 	float GameEntity::Rotation(SPACE space) {
-		if (space == local || mParent == NULL)
+		if (space == local || mParent == nullptr)
 			return mRotation;
 		return mParent->Rotation(world) + mRotation;
 	}
@@ -56,7 +56,7 @@ namespace EngineSDL {
 	}
 
 	Vector2 GameEntity::Scale(SPACE space) {
-		if (space == local || mParent == NULL) {
+		if (space == local || mParent == nullptr) {
 			return mScale;
 		}
 
@@ -78,7 +78,7 @@ namespace EngineSDL {
 	void GameEntity::Parent(GameEntity* parent) {
 
 
-		if (parent == NULL) {
+		if (parent == nullptr) {
 
 			mPos = Pos(world);
 			mScale = Scale(world);
@@ -88,8 +88,8 @@ namespace EngineSDL {
 		else {
 
 			//If the object already has a parent, remove the current parent to get it ready to be the child for the new parent
-			if (mParent != NULL)
-				Parent(NULL);
+			if (mParent != nullptr)
+				Parent(nullptr);
 
 			Vector2 parentScale = parent->Scale(world);
 

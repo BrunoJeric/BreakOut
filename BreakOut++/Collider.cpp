@@ -1,13 +1,13 @@
 #include "Collider.h"
 
 Collider::Collider(ColliderType type) : mType(type) {
-	mDebugTexture = NULL;
+	mDebugTexture = nullptr;
 }
 
 Collider::~Collider() {
-	if (mDebugTexture != NULL) {
+	if (mDebugTexture != nullptr) {
 		delete mDebugTexture;
-		mDebugTexture = NULL;
+		mDebugTexture = nullptr;
 	}
 }
 

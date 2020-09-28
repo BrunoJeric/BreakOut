@@ -4,7 +4,7 @@ namespace EngineSDL {
 		mGraphics = Graphics::Instance();
 		mTex = AssetManager::Instance()->GetTexture(fileName);
 
-		SDL_QueryTexture(mTex, NULL, NULL, &mWidth, &mHeight);
+		SDL_QueryTexture(mTex, nullptr, nullptr, &mWidth, &mHeight);
 
 		mClipped = false;
 
@@ -37,7 +37,7 @@ namespace EngineSDL {
 
 		mClipped = false;
 
-		SDL_QueryTexture(mTex, NULL, NULL, &mWidth, &mHeight);
+		SDL_QueryTexture(mTex, nullptr, nullptr, &mWidth, &mHeight);
 
 		mRenderRect.w = mWidth;
 		mRenderRect.h = mHeight;
@@ -46,8 +46,8 @@ namespace EngineSDL {
 	}
 
 	Texture::~Texture() {
-		mTex = NULL;
-		mGraphics = NULL;
+		mTex = nullptr;
+		mGraphics = nullptr;
 	}
 
 
@@ -74,6 +74,6 @@ namespace EngineSDL {
 		mRenderRect.w = (int)(mWidth * scale.x);
 		mRenderRect.h = (int)(mHeight * scale.y);
 
-		mGraphics->DrawTexture(mTex, (mClipped) ? &mClipRect : NULL, &mRenderRect, Rotation(world));
+		mGraphics->DrawTexture(mTex, (mClipped) ? &mClipRect : nullptr, &mRenderRect, Rotation(world));
 	}
 }

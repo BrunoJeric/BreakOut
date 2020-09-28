@@ -3,20 +3,20 @@
 #include "PhysicsManager.h"
 
 PhysEntity::PhysEntity() {
-	mBroadPhaseCollider = NULL;
+	mBroadPhaseCollider = nullptr;
 	mId = 0;
 }
 PhysEntity::~PhysEntity() {
 	for (int i = 0; i < mColliders.size(); i++) {
 		delete mColliders[i];
-		mColliders[i] = NULL;
+		mColliders[i] = nullptr;
 	}
 	
 	mColliders.clear();
 
 	if (mBroadPhaseCollider) {
 		delete mBroadPhaseCollider;
-		mBroadPhaseCollider = NULL;
+		mBroadPhaseCollider = nullptr;
 	}
 	if (mId != 0) {
 		PhysicsManager::Instance()->UnregisterEntity(mId);

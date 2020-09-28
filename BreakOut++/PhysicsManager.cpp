@@ -1,9 +1,9 @@
 #include "PhysicsManager.h"
 
-PhysicsManager* PhysicsManager::sInstance = NULL;
+PhysicsManager* PhysicsManager::sInstance = nullptr;
 
 PhysicsManager* PhysicsManager::Instance() {
-	if (sInstance == NULL) {
+	if (sInstance == nullptr) {
 		sInstance = new PhysicsManager();
 	}
 	return sInstance;
@@ -11,7 +11,7 @@ PhysicsManager* PhysicsManager::Instance() {
 
 void PhysicsManager::Release() {
 	delete sInstance;
-	sInstance = NULL;
+	sInstance = nullptr;
 }
 
 void PhysicsManager::SetLayerCollisionMask(CollisionLayers layer, CollisonFlags flags) {

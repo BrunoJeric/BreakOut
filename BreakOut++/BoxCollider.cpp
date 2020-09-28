@@ -18,7 +18,7 @@ BoxCollider::~BoxCollider() {
 	for (int i = 0; i < MAX_VERTS; i++) {
 		
 		delete mVerts[i];
-		mVerts[i] = NULL;
+		mVerts[i] = nullptr;
 
 	}
 }

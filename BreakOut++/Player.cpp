@@ -32,15 +32,15 @@ Player::Player(){
 }
 
 Player::~Player(){
-	mTimer = NULL;
-	mInput = NULL;
-	mAudio = NULL;
+	mTimer = nullptr;
+	mInput = nullptr;
+	mAudio = nullptr;
 
 	delete mPlatform;
-	mPlatform = NULL;
+	mPlatform = nullptr;
 
 	delete mDeathAnimation;
-	mDeathAnimation = NULL;
+	mDeathAnimation = nullptr;
 }
 
 bool Player::IgnoreCollision() {
@@ -68,7 +68,7 @@ void Player::HandleMovment() {
 }
 
 void Player::Hit(PhysEntity* other) {
-
+	AudioManager::Instance()->PlaySFX("platform.wav");
 }
 
 void Player::DroppedBall() {

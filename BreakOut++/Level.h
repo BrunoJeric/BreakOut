@@ -5,6 +5,7 @@
 #include "Ball.h"
 #include "Brick.h"
 #include <vector>
+#include <sys/stat.h>
 
 class Level : GameEntity {
 
@@ -19,6 +20,8 @@ private:
 	bool mLevelStarted;
 
 	float mLabelTimer;
+
+	Texture* mLevelTexture;
 
 	Texture* mLevelLabel;
 	ScoreBoard* mLevelNumber;
@@ -43,7 +46,6 @@ private:
 	float mGameOverTimer;
 	float  mGameOverLabelOnScreen;
 
-	//int mBrickTypes;
 	int mRowCount;
 	int	mColumnCount;
 	int	mRowSpacing;
@@ -54,7 +56,10 @@ private:
 	std::vector<Brick*> mBricks;
 	
 	GameEntity* mBrickContainer;
-	LEVEL_STATES mCurrentState;	
+	LEVEL_STATES mCurrentState;
+
+	Texture* mDemoOver;
+	bool mDemo = true;
 
 
 
@@ -80,3 +85,7 @@ public:
 	void Render();
 
 };
+inline bool exists_test(const std::string& name) {
+	struct stat buffer;
+	return (stat(name.c_str(), &buffer) == 0);
+}

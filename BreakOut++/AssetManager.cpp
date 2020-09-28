@@ -1,9 +1,9 @@
 #include "AssetManager.h"
 namespace EngineSDL {
-	AssetManager* AssetManager::sInstance = NULL;
+	AssetManager* AssetManager::sInstance = nullptr;
 
 	AssetManager* AssetManager::Instance() {
-		if (sInstance == NULL)
+		if (sInstance == nullptr)
 			sInstance = new AssetManager();
 
 		return sInstance;
@@ -11,7 +11,7 @@ namespace EngineSDL {
 
 	void AssetManager::Release() {
 		delete sInstance;
-		sInstance = NULL;
+		sInstance = nullptr;
 	}
 
 	AssetManager::AssetManager() {
@@ -19,43 +19,43 @@ namespace EngineSDL {
 	}
 	AssetManager::~AssetManager() {
 		for (auto tex : mTextures) {
-			if (tex.second != NULL) {
+			if (tex.second != nullptr) {
 				SDL_DestroyTexture(tex.second);
 			}
 		}
 		mTextures.clear();
 
 		for (auto text : mText) {
-			if (text.second != NULL) {
+			if (text.second != nullptr) {
 				SDL_DestroyTexture(text.second);
 			}
 		}
 		mText.clear();
 		for (auto font : mFonts) {
-			if (font.second != NULL) {
+			if (font.second != nullptr) {
 				TTF_CloseFont(font.second);
 			}
 		}
 		mFonts.clear();
 
 		for (auto music : mMusic) {
-			if (music.second != NULL) {
+			if (music.second != nullptr) {
 				Mix_FreeMusic(music.second);
 			}
 		}
 		mMusic.clear();
 
 		for (auto sfx : mSFX) {
-			if (sfx.second != NULL) {
+			if (sfx.second != nullptr) {
 				Mix_FreeChunk(sfx.second);
 			}
 		}
 		mSFX.clear();
 
 		/*for (auto level : mLevels) {
-			if (level.second != NULL) {
+			if (level.second != nullptr) {
 				delete level.second;
-				level.second = NULL;
+				level.second = nullptr;
 			}
 		}
 		mLevels.clear();*/
@@ -73,48 +73,39 @@ namespace EngineSDL {
 	}
 
 	TTF_Font* AssetManager::GetFont(std::string filename, int size) {
-		//Get the full path of the font
 		std::string fullPath = SDL_GetBasePath();
 		fullPath.append("Assets/" + filename);
 
-		//The key takes into account the size of the font aswell since the same font can be opened with different sizes
 		std::string key = fullPath + (char)size;
 
-		//If the font has not been already loaded, load it and add it to the mFonts map
 		if (mFonts[key] == nullptr) {
 
 			mFonts[key] = TTF_OpenFont(fullPath.c_str(), size);
-			//Error handling for opening the font
 			if (mFonts[key] == nullptr)
 				printf("Font Loading Error: Font-%s Error-%s", filename.c_str(), TTF_GetError());
 		}
 
-		//returning the cached font from the map
 		return mFonts[key];
 	}
 
 	SDL_Texture* AssetManager::GetText(std::string text, std::string filename, int size, SDL_Color color) {
-		//Get the font from the font cache
 		TTF_Font* font = GetFont(filename, size);
 
-		//The key takes into account the font, text, size, and color to differentiate text textures
 		std::string key = text + filename + (char)size + (char)color.r + (char)color.b + (char)color.g;
 
-		//If the same text has not been rendered before, render it and add it to the mText map
 		if (mText[key] == nullptr)
 			mText[key] = Graphics::Instance()->CreateTextTexture(font, text, color);
 
-		//returning the cached texture containing the text
 		return mText[key];
 	}
 
 	Mix_Music* AssetManager::GetMusic(std::string filename) {
 		std::string fullpath = SDL_GetBasePath();
-		fullpath.append("Assets/" + filename);
+		fullpath.append("Assets/Sounds/" + filename);
 
 		if (mMusic[fullpath] == nullptr) {
 			mMusic[fullpath] = Mix_LoadMUS(fullpath.c_str());
-			if (mMusic[fullpath] == NULL) {
+			if (mMusic[fullpath] == nullptr) {
 				std::cout << "Music Loading Error: File(" << filename.c_str() << ") - Error(" << Mix_GetError() << ") " << std::endl;
 
 			}
@@ -124,11 +115,11 @@ namespace EngineSDL {
 
 	Mix_Chunk* AssetManager::GetSFX(std::string filename) {
 		std::string fullpath = SDL_GetBasePath();
-		fullpath.append("Assets/" + filename);
+		fullpath.append("Assets/Sounds/" + filename);
 
 		if (mSFX[fullpath] == nullptr) {
 			mSFX[fullpath] = Mix_LoadWAV(fullpath.c_str());
-			if (mSFX[fullpath] == NULL) {
+			if (mSFX[fullpath] == nullptr) {
 				std::cout << "SFX Loading Error: File(" << filename.c_str() << ") - Error(" << Mix_GetError() << ") " << std::endl;
 
 			}
@@ -136,25 +127,4 @@ namespace EngineSDL {
 		return mSFX[fullpath];
 	}
 
-	//XMLDocument* AssetManager::GetLevel(std::string filename) {
-	//	std::string fullpath = SDL_GetBasePath();
-	//	fullpath.append("Assets/Level/" + filename);
-	//	XMLDocument doc;
-
-	//	if (mLevels[fullpath] == nullptr) {
-	//		doc.LoadFile(fullpath.c_str());
-
-	//		const XMLDocument& cdoc = doc;
-
-	//		const XMLAttribute* attrib = cdoc.FirstChildElement("Level")->FindAttribute("RowCount");
-
-	//		std::cout << doc.ErrorIDToName(doc.ErrorID())<< attrib->Value()<<std::endl;
-	//		mLevels[fullpath]=&doc;
-	//		if (mLevels[fullpath] == NULL) {
-	//			std::cout << "Level Loading Error: File(" << filename.c_str() << ")" << std::endl;
-
-	//		}
-	//	}
-	//	return mLevels[fullpath];
-	//}
 }

@@ -2,7 +2,7 @@
 #include "BoxCollider.h"
 #include "PhysicsManager.h"
 
-Player* Brick::sPlayer = NULL;
+Player* Brick::sPlayer = nullptr;
 
 Brick::Brick(char id,std::string hitSound, std::string breakSound, std::string texturePath, int hitPoints, int breakScore) {
 
@@ -24,7 +24,7 @@ Brick::Brick(char id,std::string hitSound, std::string breakSound, std::string t
 
 Brick::~Brick() {
 	delete mTexture;
-	mTexture = NULL;
+	mTexture = nullptr;
 }
 
 void Brick::CurrentPlayer(Player* player) {
@@ -40,8 +40,19 @@ char Brick::BrickId() {
 }
 
 void Brick::Hit(PhysEntity* other) {
-	if(mBId!='I')
+	if (mBId != 'I') {
 		mHitpoints--;
+		if (mHitpoints>=1) {
+			AudioManager::Instance()->PlaySFX(mHitSound);
+		}
+		else {
+			AudioManager::Instance()->PlaySFX(mBreakSound);
+		}
+	}
+	else {
+		AudioManager::Instance()->PlaySFX(mHitSound);
+
+	}
 }
 
 
@@ -50,7 +61,7 @@ bool Brick::Visible() {
 }
 
 Brick* Brick::Clone() {
-	return new Brick(mId, mHitSound, mBreakSound, mTexturePath, mHitpoints, mBreakScore);
+	return new Brick(mBId, mHitSound, mBreakSound, mTexturePath, mHitpoints, mBreakScore);
 }
 
 void Brick::Update() {
