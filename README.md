@@ -1,6 +1,6 @@
 # BreakOut
 
-BrakOut clone made as test assignment C++ developer position at Gamepires.
+BrakOut clone made as test assignment for C++ developer position at Gamepires.
 
 ## Game description
 
